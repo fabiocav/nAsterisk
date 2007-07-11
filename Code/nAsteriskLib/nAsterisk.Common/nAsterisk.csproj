@@ -37,6 +37,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AGICommand\AnswerCommand.cs" />
+    <Compile Include="AGICommand\BaseAGICommand.cs" />
+    <Compile Include="AGICommand\DatabaseDeleteCommand.cs" />
+    <Compile Include="AGICommand\DatabaseDeleteTreeCommand.cs" />
+    <Compile Include="AGICommand\GetChannelStatusCommand.cs" />
     <Compile Include="AsteriskAgi.cs" />
     <Compile Include="AsteriskException.cs" />
     <Compile Include="Configuration\ITcpHostConfigurationSource.cs" />

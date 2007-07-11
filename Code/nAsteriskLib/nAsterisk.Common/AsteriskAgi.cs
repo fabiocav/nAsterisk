@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using nAsterisk.AGICommand;
 
 namespace nAsterisk
 {
@@ -170,48 +171,47 @@ namespace nAsterisk
 		#region AgiMethods
 		public void Answer()
 		{
-			this.SendCommand("ANSWER");
+			AnswerCommand command = new AnswerCommand();
 
-			this.CheckSuccess();
+			this.SendCommand(command);
+
+			this.CheckSuccess(command);
 		}
 
-		public ChannelStatus GetChannelStatus(string channelName)
+		public ChannelStatus GetChannelStatus(GetChannelStatusCommand command)
 		{
-			this.SendCommand("CHANNEL STATUS", channelName);
+			this.SendCommand(command);
 
 			int ret = this.ReadIntVar();
 			return (ChannelStatus)ret;
 		}
 
-		public void DatabaseDelete(string family, string key)
+		public void DatabaseDelete(DatabaseDeleteCommand command)
 		{
-			this.SendCommand("DATABASE DEL", family, key);
+			this.SendCommand(command);
 
-			this.CheckSuccess();
+			this.CheckSuccess(command);
 		}
 
-		public void DatabaseDeleteTree(string family, string keytree)
+		public void DatabaseDeleteTree(DatabaseDeleteTreeCommand command)
 		{
-			this.SendCommand("DATABASE DELTREE ", family, keytree);
+			this.SendCommand(command);
 
-			this.CheckSuccess();
+			this.CheckSuccess(command);
 		}
 
-
-		private void SendCommand(string command, params string[] vars)
+		private void SendCommand(BaseAGICommand command)
 		{
-			StringBuilder sb = new StringBuilder();
-			sb.Append(command);
+			string commandString = command.GetCommand();
 
-			Array.ForEach<string>(vars, delegate(string var) { sb.AppendFormat(" {0}", var); });
-
-			sb.Append("\n");
-			_writer.Write(sb.ToString());
+			commandString += "\n";
+			
+			_writer.Write(commandString);
 			_writer.Flush();
 		}
 		#endregion
 
-		private void CheckSuccess()
+		private void CheckSuccess(BaseAGICommand command)
 		{
 			string var = _reader.ReadLine();
 
@@ -221,7 +221,7 @@ namespace nAsterisk
 			{
 				int ret = int.Parse(var.Substring(var.IndexOf("result=") + 7, 1));
 
-				if (ret != 0)
+				if (!command.IsSuccessfulResult(ret))
 					throw new AsteriskException("Command Failed");
 			}
 			else
