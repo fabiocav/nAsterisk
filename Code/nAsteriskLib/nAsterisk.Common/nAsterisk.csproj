@@ -37,7 +37,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgiContext.cs" />
     <Compile Include="AsteriskAgi.cs" />
     <Compile Include="AsteriskException.cs" />
     <Compile Include="IAgiScriptHost.cs" />
