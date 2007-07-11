@@ -84,13 +84,30 @@ namespace nAsterisk
 			AsteriskAgi agi = new AsteriskAgi(stream);
 			agi.Init();
 
-			// Look at the incoming URL and match it to a script
 			Uri uri = new Uri(agi.Request);
+
+			// Parse the query string variables
+			Dictionary<string, string> vars;
+			if (!string.IsNullOrEmpty(uri.Query))
+			{
+				// Get rid of the ? and split on &
+				string[] qvars = uri.Query.Substring(1).Split('&');
+				vars = new Dictionary<string, string>(qvars.Length);
+				Array.ForEach<string>(qvars, delegate(string qvar)
+				{
+					string[] var = qvar.Split('=');
+					vars.Add(var[0], var[1]);
+				});
+			}
+			else
+				vars = new Dictionary<string, string>();
+
+			// Look at the incoming URL and match it to a script
 			if (_mappings.ContainsKey(uri.AbsolutePath))
 			{
 				Type scriptType = _mappings[uri.AbsolutePath];
 				IAsteriskAgiScript script = (IAsteriskAgiScript)Activator.CreateInstance(scriptType);
-				script.Execute(agi);
+				script.Execute(agi, vars);
 			}
 		}
 
