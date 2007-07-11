@@ -32,15 +32,23 @@ namespace nAsterisk
 
 		private void ParseVariables()
 		{
-			// Read until we get a timeout
+			// Read one name value pair per line until we get a blank line
 			try
 			{
 				while (true)
 				{
 					string line = _reader.ReadLine();
-					string[] var = line.Split(new string[] { ": " }, 2, StringSplitOptions.None);
-					_variables.Add(var[0].ToLower(), var[1]);
-					Console.WriteLine("Got agi variable {0}:{1}", var[0], var[1]);
+					if (line != "")
+					{
+						string[] var = line.Split(new string[] { ": " }, 2, StringSplitOptions.None);
+						_variables.Add(var[0].ToLower(), var[1]);
+						Console.WriteLine("Got agi variable {0}:{1}", var[0], var[1]);
+					}
+					else
+					{
+						Console.WriteLine("Done reading agi variables");
+						break;
+					}
 				}
 			}
 			catch (Exception) { }
