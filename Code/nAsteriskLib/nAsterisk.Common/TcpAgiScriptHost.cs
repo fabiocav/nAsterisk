@@ -58,9 +58,12 @@ namespace nAsterisk
 			_mappings.Add(uri, scriptType);
 		}
 
+		/// <summary>
+		/// Async target for _listener.BeginAcceptTcpClient
+		/// </summary>
+		/// <param name="iar"></param>
 		private void GotConnection(IAsyncResult iar)
 		{
-			
 			// End the accept
 			TcpClient client = null;
 			
@@ -79,36 +82,44 @@ namespace nAsterisk
 
 		private void DispatchScript(TcpClient client)
 		{
-			Stream stream = client.GetStream();
-
-			AsteriskAgi agi = new AsteriskAgi(stream);
-			agi.Init();
-
-			Uri uri = new Uri(agi.Request);
-
-			// Parse the query string variables
-			Dictionary<string, string> vars;
-			if (!string.IsNullOrEmpty(uri.Query))
+			System.Threading.Thread t = new System.Threading.Thread(delegate()
 			{
-				// Get rid of the ? and split on &
-				string[] qvars = uri.Query.Substring(1).Split('&');
-				vars = new Dictionary<string, string>(qvars.Length);
-				Array.ForEach<string>(qvars, delegate(string qvar)
+				using (Stream stream = client.GetStream())
 				{
-					string[] var = qvar.Split('=');
-					vars.Add(var[0], var[1]);
-				});
-			}
-			else
-				vars = new Dictionary<string, string>();
+					AsteriskAgi agi = new AsteriskAgi(stream);
+					agi.Init();
 
-			// Look at the incoming URL and match it to a script
-			if (_mappings.ContainsKey(uri.AbsolutePath))
-			{
-				Type scriptType = _mappings[uri.AbsolutePath];
-				IAsteriskAgiScript script = (IAsteriskAgiScript)Activator.CreateInstance(scriptType);
-				script.Execute(agi, vars);
-			}
+					Uri uri = new Uri(agi.Request);
+
+					// Parse the query string variables
+					Dictionary<string, string> vars;
+					if (!string.IsNullOrEmpty(uri.Query))
+					{
+						// Get rid of the ? and split on &
+						string[] qvars = uri.Query.Substring(1).Split('&');
+						vars = new Dictionary<string, string>(qvars.Length);
+						Array.ForEach<string>(qvars, delegate(string qvar)
+						{
+							string[] var = qvar.Split('=');
+							vars.Add(var[0], var[1]);
+						});
+					}
+					else
+						vars = new Dictionary<string, string>();
+
+					// Look at the incoming URL and match it to a script
+					if (_mappings.ContainsKey(uri.AbsolutePath))
+					{
+						Type scriptType = _mappings[uri.AbsolutePath];
+						IAsteriskAgiScript script = (IAsteriskAgiScript)Activator.CreateInstance(scriptType);
+						script.Execute(agi, vars);
+					}
+				}
+
+				client.Close();
+			});
+
+			t.Start();
 		}
 
 		#region IAgiScriptHost Members
