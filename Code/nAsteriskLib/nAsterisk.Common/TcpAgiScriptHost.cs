@@ -34,7 +34,6 @@ namespace nAsterisk
 		public TcpAgiScriptHost(IPEndPoint localEP)
 		{
 			_listener = new TcpListener(localEP);
-
 		}
 		#endregion
 
@@ -70,6 +69,7 @@ namespace nAsterisk
 			
 			if (client != null)
 			{
+				client.ReceiveTimeout = 250;
 				this.DispatchScript(client);
 
 				// Restart the Accept
@@ -80,16 +80,17 @@ namespace nAsterisk
 		private void DispatchScript(TcpClient client)
 		{
 			Stream stream = client.GetStream();
-			//TODO: Look at the incoming URL and match it to a script
 
+			AsteriskAgi agi = new AsteriskAgi(stream);
+			agi.Init();
 
-			// This is just for testing
-			using (StreamReader sr = new StreamReader(stream, System.Text.ASCIIEncoding.ASCII))
+			// Look at the incoming URL and match it to a script
+			Uri uri = new Uri(agi.Request);
+			if (_mappings.ContainsKey(uri.AbsolutePath))
 			{
-				char[] buf = new char[1024];
-				int read = sr.Read(buf, 0, 1024);
-
-				Console.Write(new string(buf, 0, read));
+				Type scriptType = _mappings[uri.AbsolutePath];
+				IAsteriskAgiScript script = (IAsteriskAgiScript)Activator.CreateInstance(scriptType);
+				script.Execute(agi);
 			}
 		}
 
