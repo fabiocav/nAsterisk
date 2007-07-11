@@ -205,16 +205,29 @@ namespace nAsterisk
 
 			Array.ForEach<string>(vars, delegate(string var) { sb.AppendFormat(" {0}", var); });
 
-			_writer.WriteLine(sb.ToString());
+			sb.Append("\n");
+			_writer.Write(sb.ToString());
 			_writer.Flush();
 		}
 		#endregion
 
 		private void CheckSuccess()
 		{
-			int ret = this.ReadIntVar();
-			if( ret != 0)
-				throw new AsteriskException("Deltree Failed");
+			string var = _reader.ReadLine();
+
+			int result = int.Parse(var.Substring(0, 3));
+
+			if (result == 200)
+			{
+				int ret = int.Parse(var.Substring(var.IndexOf("result=") + 7, 1));
+
+				if (ret != 0)
+					throw new AsteriskException("Command Failed");
+			}
+			else
+			{
+				throw new AsteriskException(var.Substring(4));
+			}
 		}
 
 		private int ReadIntVar()

@@ -12,6 +12,7 @@ namespace nAsterisk
 		#region MemberVars
 		TcpListener _listener;
 		Dictionary<string, Type> _mappings = new Dictionary<string,Type>();
+		IAsyncResult _iar = null;
 		#endregion
 
 		#region Constructors
@@ -38,11 +39,11 @@ namespace nAsterisk
 		#endregion
 
 		/// <summary>
-		/// Reads URI/script associations from the config source
+		/// Gets configuration from the config source
 		/// </summary>
-		private void SetupUris()
+		public void Configure(Configuration.ITcpHostConfigurationSource config)
 		{
-
+			_mappings = config.GetUriMappings();
 		}
 
 		public void AddUri(string uri, Type scriptType)
@@ -64,6 +65,8 @@ namespace nAsterisk
 		/// <param name="iar"></param>
 		private void GotConnection(IAsyncResult iar)
 		{
+			_iar = null;
+
 			// End the accept
 			TcpClient client = null;
 			
@@ -76,7 +79,7 @@ namespace nAsterisk
 				this.DispatchScript(client);
 
 				// Restart the Accept
-				_listener.BeginAcceptTcpClient(new AsyncCallback(GotConnection), null);
+				_iar = _listener.BeginAcceptTcpClient(new AsyncCallback(GotConnection), null);
 			}
 		}
 
@@ -127,11 +130,14 @@ namespace nAsterisk
 		public void Start()
 		{
 			_listener.Start();
-			_listener.BeginAcceptTcpClient(new AsyncCallback(GotConnection), null);
+			_iar = _listener.BeginAcceptTcpClient(new AsyncCallback(GotConnection), null);
 		}
 
 		public void Stop()
 		{
+			if (_iar != null)
+				_listener.EndAcceptTcpClient(_iar);
+			
 			_listener.Stop();
 		}
 
