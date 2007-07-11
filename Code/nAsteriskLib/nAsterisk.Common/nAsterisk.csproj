@@ -7,8 +7,8 @@
     <ProjectGuid>{44082AD5-D04F-462F-9681-71C927CAA105}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>nAsterisk.Common</RootNamespace>
-    <AssemblyName>nAsterisk.Common</AssemblyName>
+    <RootNamespace>nAsterisk</RootNamespace>
+    <AssemblyName>nAsterisk</AssemblyName>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -37,10 +37,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AGIContext.cs" />
-    <Compile Include="IAsteriskAGI.cs" />
-    <Compile Include="IAsteriskAGIScript.cs" />
+    <Compile Include="AgiContext.cs" />
+    <Compile Include="AsteriskAgi.cs" />
+    <Compile Include="AsteriskException.cs" />
+    <Compile Include="IAgiScriptHost.cs" />
+    <Compile Include="IAsteriskAgiScript.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TcpAgiScriptHost.cs" />
+    <Compile Include="_enum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
