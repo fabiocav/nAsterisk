@@ -245,7 +245,7 @@ namespace nAsterisk
 			return command.GetResponse();
 		}
 
-		public string VerboseLog(string message, AsteriskVerboseLevel level)
+		public void VerboseLog(string message, AsteriskVerboseLevel level)
 		{
 			VerboseCommand command = new VerboseCommand(message, level);
 			processCommand(command);
