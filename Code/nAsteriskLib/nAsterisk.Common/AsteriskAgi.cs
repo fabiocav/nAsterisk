@@ -219,6 +219,13 @@ namespace nAsterisk
 			return command.GetResponse();
 		}
 
+		public string GetVariable(GetVariableCommand command)
+		{
+			processCommand(command);
+
+			return command.GetResponse();
+		}
+
 		private void processCommand(BaseAGICommand command)
 		{
 			this.SendCommand(command);

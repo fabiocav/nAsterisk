@@ -54,9 +54,9 @@ namespace nAsterisk.AGICommand
 
 		#region ISupportCommandResponse Members
 
-		public void ProcessResponse(string response)
+		void ISupportCommandResponse.ProcessResponse(string response)
 		{
-			if (response.Length > 0)
+			if (response.Length > 2)
 				_resultingValue = response.Substring(1, response.Length - 2);
 		}
 
