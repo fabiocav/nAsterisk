@@ -34,8 +34,11 @@ namespace nAsterisk.AGICommand
 
 		public override bool IsSuccessfulResult(string result)
 		{
-
-			_channelStatus = (ChannelStatus)Enum.Parse(typeof(ChannelStatus), result);
+			int status = 0;
+			if (int.TryParse(result, out status))
+			{
+				_channelStatus = (ChannelStatus)status;
+			}
 			return true; 
 		}
 
