@@ -8,6 +8,7 @@ namespace nAsterisk
 	public class FastAGIResponse
 	{
 		private int _responseCode;
+		private int? _endPosition;
 		private string _resultValue;
 		private string _payload;
 
@@ -32,6 +33,12 @@ namespace nAsterisk
 			set { _responseCode = value; }
 		}
 
+		public int? EndPosition
+		{
+			get { return _endPosition; }
+			set { _endPosition = value; }
+		}
+
 		public static FastAGIResponse ParseResponse(string responseString)
 		{
 			Regex responseRegex = new Regex(@"^(?<ResponseCode>\d{3})\sresult=(?<ResultCode>[^\s$]*)(?:\s\((?<ResultPayload>[^)]*)\)){0,1}(?:\sendpos=(?<EndPosition>\d*)){0,1}$", RegexOptions.Singleline);
@@ -44,6 +51,11 @@ namespace nAsterisk
 
 				fastAgiResponse._responseCode = int.Parse(responseMatch.Groups["ResponseCode"].Value);
 				fastAgiResponse._resultValue = responseMatch.Groups["ResultCode"].Value;
+
+				if (responseMatch.Groups["EndPosition"].Success)
+				{
+					fastAgiResponse._endPosition = int.Parse(responseMatch.Groups["EndPosition"].Value);
+				}
 				
 				if (responseMatch.Groups["ResultPayload"] != null)
 					fastAgiResponse._payload = responseMatch.Groups["ResultPayload"].Value;
