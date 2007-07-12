@@ -14,28 +14,25 @@ namespace nAsterisk.Scripts
 			agi.Answer();
 			Console.WriteLine("Called Answer");
 
-			GetChannelStatusCommand gcscommand = new GetChannelStatusCommand();
-			ChannelStatus status = agi.GetChannelStatus(gcscommand);
+			
+			ChannelStatus status = agi.GetChannelStatus();
 			Console.WriteLine("Called GetChannelStatus: {0}", status);
 
 
-			DatabasePutCommand dpcommand = new DatabasePutCommand("test", "blah", "foobar");
-			agi.DatabasePut(dpcommand);
+			agi.DatabasePut("test", "blah", "foobar");
 			Console.WriteLine("Called DatabasePut set var to 'foobar'");
 
 
-			DatabaseGetCommand dgcommand = new DatabaseGetCommand("test", "blah");
-			string var = agi.DatabaseGet(dgcommand);
+			string var = agi.DatabaseGet("test", "blah");
 			Console.WriteLine("Called DatabaseGet: {0}", var);
 
 
-			DatabaseDeleteCommand ddcommand = new DatabaseDeleteCommand("test", "blah");
-			agi.DatabaseDelete(ddcommand);
+			agi.DatabaseDelete("test", "blah");
 			Console.WriteLine("Called DatabaseDelete");
 			// Test that the Delete worked
 			try
 			{
-				var = agi.DatabaseGet(dgcommand);
+				var = agi.DatabaseGet("test", "blah");
 				Console.WriteLine("DatabaseGet Succeded, it shouldn't have: {0}", var);
 			}
 			catch (AsteriskException)
@@ -72,7 +69,7 @@ namespace nAsterisk.Scripts
 			Console.WriteLine("Called StreamFile");
 
 
-			agi.HangUp(new HangUpCommand());
+			agi.HangUp();
 			Console.WriteLine("Called Hangup");
 		}
 

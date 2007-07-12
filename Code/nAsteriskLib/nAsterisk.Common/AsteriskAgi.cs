@@ -233,7 +233,7 @@ namespace nAsterisk
 
 		public string Execute(string application, string options)
 		{
-			ExecuteCommand command = new ExecuteCommand(ApplicationException, options);
+			ExecuteCommand command = new ExecuteCommand(application, options);
 
 			processCommand(command);
 

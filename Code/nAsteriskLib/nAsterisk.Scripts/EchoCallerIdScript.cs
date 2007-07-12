@@ -12,7 +12,7 @@ namespace nAsterisk.Scripts
 		{
 			agi.Answer();
 
-			ChannelStatus status = agi.GetChannelStatus(new nAsterisk.AGICommand.GetChannelStatusCommand());
+			ChannelStatus status = agi.GetChannelStatus();
 
 			Console.WriteLine("Caller ID is {0}", agi.CallerId);
 		}
