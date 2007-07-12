@@ -14,6 +14,7 @@ namespace nAsterisk.AGICommand
 		{
 			_family = family;
 			_key = keyTree;
+			_value = value;
 		}
 
 		public string Key
