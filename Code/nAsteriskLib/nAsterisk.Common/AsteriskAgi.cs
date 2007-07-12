@@ -226,6 +226,13 @@ namespace nAsterisk
 			return command.GetResponse();
 		}
 
+		public string WaitForDigit(WaitForDigitCommand command)
+		{
+			processCommand(command);
+
+			return command.GetResponse();
+		}
+
 		private void processCommand(BaseAGICommand command)
 		{
 			this.SendCommand(command);
