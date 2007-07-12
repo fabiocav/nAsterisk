@@ -14,7 +14,6 @@ namespace nAsterisk.Scripts
 			agi.Answer();
 			Console.WriteLine("Called Answer");
 
-			
 			ChannelStatus status = agi.GetChannelStatus();
 			Console.WriteLine("Called GetChannelStatus: {0}", status);
 
@@ -69,7 +68,15 @@ namespace nAsterisk.Scripts
 			Console.WriteLine("Called StreamFile");
 
 
-			agi.HangUp();
+			agi.SetVariable("foo", "bar");
+			Console.WriteLine("Called SetVariable set var to 'bar'");
+
+
+			var = agi.GetVariable("foo");
+			Console.WriteLine("Called GetVariable: {0}", var);
+
+
+			agi.HangUp(new HangUpCommand());
 			Console.WriteLine("Called Hangup");
 		}
 
