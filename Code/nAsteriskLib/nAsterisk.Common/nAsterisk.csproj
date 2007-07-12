@@ -41,6 +41,8 @@
     <Compile Include="AGICommand\BaseAGICommand.cs" />
     <Compile Include="AGICommand\DatabaseDeleteCommand.cs" />
     <Compile Include="AGICommand\DatabaseDeleteTreeCommand.cs" />
+    <Compile Include="AGICommand\DatabaseGetCommand.cs" />
+    <Compile Include="AGICommand\DatabasePutCommand.cs" />
     <Compile Include="AGICommand\GetChannelStatusCommand.cs" />
     <Compile Include="AsteriskAgi.cs" />
     <Compile Include="AsteriskException.cs" />
