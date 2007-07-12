@@ -5,6 +5,7 @@ using System.Reflection;
 
 using nAsterisk;
 using nAsterisk.Configuration;
+using nAsterisk.Scripts;
 
 namespace CliAgiHost
 {
@@ -13,7 +14,7 @@ namespace CliAgiHost
 		static void Main(string[] args)
 		{
 			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", Type.GetType("nAsterisk.Scripts.EchoCallerIdScript, nAsterisk.Scripts"));
+			mappings.Add("/blahblah", typeof(EchoCallerIdScript));
 
 			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
 			TcpAgiScriptHost host = new TcpAgiScriptHost();
