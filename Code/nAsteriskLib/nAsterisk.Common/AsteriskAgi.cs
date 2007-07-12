@@ -223,6 +223,12 @@ namespace nAsterisk
 
 				if (!command.IsSuccessfulResult(ret))
 					throw new AsteriskException("Command Failed");
+
+				if (command is ISupportCommandResponse)
+				{
+				    if (var.Length >= 13)
+				        ((ISupportCommandResponse)command).ProcessResponse(var.Substring(13));
+				}
 			}
 			else
 			{
