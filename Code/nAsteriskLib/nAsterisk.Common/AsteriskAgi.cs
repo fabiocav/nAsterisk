@@ -245,6 +245,12 @@ namespace nAsterisk
 			return command.GetResponse();
 		}
 
+		public void EnableTDD(bool enabled)
+		{
+			TDDModeCommand command = new TDDModeCommand(enabled);
+			processCommand(command);
+		}
+
 		public void VerboseLog(string message, AsteriskVerboseLevel level)
 		{
 			VerboseCommand command = new VerboseCommand(message, level);
