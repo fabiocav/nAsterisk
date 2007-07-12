@@ -179,7 +179,7 @@ namespace nAsterisk
 		public ChannelStatus GetChannelStatus(GetChannelStatusCommand command)
 		{
 			processCommand(command);
-			
+
 			return command.GetResponse();
 		}
 
@@ -196,7 +196,7 @@ namespace nAsterisk
 		public string DatabaseGet(DatabaseGetCommand command)
 		{
 			processCommand(command);
-			
+
 			return command.GetResponse();
 		}
 
@@ -229,8 +229,15 @@ namespace nAsterisk
 		private void processCommand(BaseAGICommand command)
 		{
 			this.SendCommand(command);
+			string response = this.ReadResult();
 
-			this.CheckSuccess(command);
+			if (!command.IsSuccessfulResult(response))
+				throw new AsteriskException("Command Failed");
+
+			if (command is ISupportCommandResponse)
+			{
+				((ISupportCommandResponse)command).ProcessResponse(response);
+			}
 		}
 
 		private void SendCommand(BaseAGICommand command)
@@ -242,38 +249,19 @@ namespace nAsterisk
 			_writer.Write(commandString);
 			_writer.Flush();
 		}
+
+		private string ReadResult()
+		{
+			string response = _reader.ReadLine();
+
+			int resultCode = int.Parse(response.Substring(0, 3));
+			if (resultCode != 200)
+			{
+				throw new AsteriskException(response.Substring(4));
+			}
+
+			return response.Substring(4);
+		}
 		#endregion
-
-		private void CheckSuccess(BaseAGICommand command)
-		{
-			string var = _reader.ReadLine();
-
-			int result = int.Parse(var.Substring(0, 3));
-
-			if (result == 200)
-			{
-				int resultIndex = var.IndexOf("result=") + 7;
-				string resultValue = var.Substring(resultIndex, var.IndexOf(" ",resultIndex));
-
-				if (!command.IsSuccessfulResult(resultValue))
-					throw new AsteriskException("Command Failed");
-
-				if (command is ISupportCommandResponse)
-				{
-				    if (var.Length >= 13)
-				        ((ISupportCommandResponse)command).ProcessResponse(var.Substring(13));
-				}
-			}
-			else
-			{
-				throw new AsteriskException(var.Substring(4));
-			}
-		}
-
-		private int ReadIntVar()
-		{
-			string var = _reader.ReadLine();
-			return int.Parse(var);
-		}
 	}
 }
