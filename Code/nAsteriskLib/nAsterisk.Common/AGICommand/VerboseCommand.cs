@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	class VerboseCommand : BaseAGICommand
+	internal class VerboseCommand : BaseAGICommand
 	{
 		private string _message;
 		private AsteriskVerboseLevel _level;

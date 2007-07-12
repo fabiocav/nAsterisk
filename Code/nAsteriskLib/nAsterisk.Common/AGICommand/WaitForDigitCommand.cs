@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class WaitForDigitCommand : BaseAGICommand
+	internal class WaitForDigitCommand : BaseAGICommand
 	{
 		private TimeSpan _timeout;
 		private string _digit = "";

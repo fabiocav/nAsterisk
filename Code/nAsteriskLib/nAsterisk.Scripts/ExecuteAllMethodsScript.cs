@@ -56,6 +56,18 @@ namespace nAsterisk.Scripts
 			Console.WriteLine("Called VerboseLog");
 
 
+			try
+			{
+				Console.WriteLine("Calling EnableTDD(true)");
+				agi.EnableTDD(true);
+				Console.WriteLine("Called EnableTDD(true)");
+			}
+			catch (AsteriskException)
+			{
+				Console.WriteLine("Tried to enable TDD but the channel is not capable.");
+			}
+
+
 			agi.HangUp(new HangUpCommand());
 			Console.WriteLine("Called Hangup");
 		}
