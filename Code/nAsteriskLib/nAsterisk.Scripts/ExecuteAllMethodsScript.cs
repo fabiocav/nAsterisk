@@ -68,6 +68,10 @@ namespace nAsterisk.Scripts
 			}
 
 
+			agi.StreamFile("vm-savedto");
+			Console.WriteLine("Called StreamFile");
+
+
 			agi.HangUp(new HangUpCommand());
 			Console.WriteLine("Called Hangup");
 		}

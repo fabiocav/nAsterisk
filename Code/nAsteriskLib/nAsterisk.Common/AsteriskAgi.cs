@@ -245,6 +245,60 @@ namespace nAsterisk
 			return command.GetResponse();
 		}
 
+		#region StreamFile overloads
+		public string StreamFile(string filename, string escapedigits, int offset)
+		{
+			int oldtimeout = _stream.ReadTimeout;
+			_stream.ReadTimeout = 60000;
+
+			StreamFileCommand command = new StreamFileCommand(filename, escapedigits, offset);
+			processCommand(command);
+
+			_stream.ReadTimeout = oldtimeout;
+
+			return command.GetResponse();
+		}
+
+		public string StreamFile(string filename, string escapedigits)
+		{
+			int oldtimeout = _stream.ReadTimeout;
+			_stream.ReadTimeout = 60000;
+
+			StreamFileCommand command = new StreamFileCommand(filename, escapedigits);
+			processCommand(command);
+
+			_stream.ReadTimeout = oldtimeout;
+
+			return command.GetResponse();
+		}
+
+		public string StreamFile(string filename, int offset)
+		{
+			int oldtimeout = _stream.ReadTimeout;
+			_stream.ReadTimeout = 60000;
+
+			StreamFileCommand command = new StreamFileCommand(filename, offset);
+			processCommand(command);
+
+			_stream.ReadTimeout = oldtimeout;
+
+			return command.GetResponse();
+		}
+
+		public string StreamFile(string filename)
+		{
+			int oldtimeout = _stream.ReadTimeout;
+			_stream.ReadTimeout = 60000;
+
+			StreamFileCommand command = new StreamFileCommand(filename);
+			processCommand(command);
+
+			_stream.ReadTimeout = oldtimeout;
+
+			return command.GetResponse();
+		}
+		#endregion
+
 		public void EnableTDD(bool enabled)
 		{
 			TDDModeCommand command = new TDDModeCommand(enabled);
