@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class GetDataCommand: BaseAGICommand, IProviteCommandResult
+	public class GetDataCommand: BaseAGICommand, IProvideCommandResult
 	{
 		private string _fileToStream;
 		private int _timeout;
@@ -74,7 +74,7 @@ namespace nAsterisk.AGICommand
 
 		#region IProviteCommandResult Members
 
-		object IProviteCommandResult.GetResult()
+		object IProvideCommandResult.GetResult()
 		{
 			return this.GetResult();
 		}

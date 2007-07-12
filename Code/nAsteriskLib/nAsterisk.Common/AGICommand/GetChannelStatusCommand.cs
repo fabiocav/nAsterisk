@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class GetChannelStatusCommand : BaseAGICommand, IProviteCommandResult
+	public class GetChannelStatusCommand : BaseAGICommand, IProvideCommandResult
 	{
 		private string _channelName;
 		private ChannelStatus _channelStatus;
@@ -49,7 +49,7 @@ namespace nAsterisk.AGICommand
 
 		#region IProviteCommandResult Members
 
-		object IProviteCommandResult.GetResult()
+		object IProvideCommandResult.GetResult()
 		{
 			return this.GetResult();
 		}

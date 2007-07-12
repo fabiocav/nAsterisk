@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class ReceiveCharCommand : BaseAGICommand, IProviteCommandResult
+	public class ReceiveCharCommand : BaseAGICommand, IProvideCommandResult
 	{
 		private int _timeout;
 		private Char? _character = null;
@@ -51,7 +51,7 @@ namespace nAsterisk.AGICommand
 
 		#region IProviteCommandResult Members
 
-		object IProviteCommandResult.GetResult()
+		object IProvideCommandResult.GetResult()
 		{
 			return this.GetResult();
 		}

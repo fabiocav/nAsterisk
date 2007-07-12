@@ -176,59 +176,117 @@ namespace nAsterisk
 			processCommand(command);
 		}
 
-		public ChannelStatus GetChannelStatus(GetChannelStatusCommand command)
+		public ChannelStatus GetChannelStatus()
 		{
+			GetChannelStatusCommand command = new GetChannelStatusCommand();
+			
 			processCommand(command);
 
 			return command.GetResult();
 		}
 
-		public void DatabaseDelete(DatabaseDeleteCommand command)
+		public ChannelStatus GetChannelStatus(string channelName)
 		{
-			processCommand(command);
-		}
+			GetChannelStatusCommand command = new GetChannelStatusCommand(channelName);
 
-		public void DatabaseDeleteTree(DatabaseDeleteTreeCommand command)
-		{
-			processCommand(command);
-		}
-
-		public string DatabaseGet(DatabaseGetCommand command)
-		{
 			processCommand(command);
 
 			return command.GetResult();
 		}
 
-		public void DatabasePut(DatabasePutCommand command)
+		public void DatabaseDelete(string family, string key)
 		{
+			DatabaseDeleteCommand command = new DatabaseDeleteCommand(family, key);
+
 			processCommand(command);
 		}
 
-		public string Execute(ExecuteCommand command)
+		public void DatabaseDeleteTree(string family)
 		{
+			DatabaseDeleteTreeCommand command = new DatabaseDeleteTreeCommand(family);
+
+			processCommand(command);
+		}
+
+		public void DatabaseDeleteTree(string family, string keeTree)
+		{
+			DatabaseDeleteTreeCommand command = new DatabaseDeleteTreeCommand(family, keeTree);
+
+			processCommand(command);
+		}
+
+		public string DatabaseGet(string family, string key)
+		{
+			DatabaseGetCommand command = new DatabaseGetCommand(family, key);
+
 			processCommand(command);
 
 			return command.GetResult();
 		}
 
-		public string GetData(GetDataCommand command)
+		public void DatabasePut(string family, string keyTree, string value)
 		{
+			DatabasePutCommand command = new DatabasePutCommand(family, keyTree, value);
+
+			processCommand(command);
+		}
+
+		public string Execute(string application, string options)
+		{
+			ExecuteCommand command = new ExecuteCommand(ApplicationException, options);
+
 			processCommand(command);
 
 			return command.GetResult();
 		}
 
-		public string GetVariable(string name)
+		public string GetData(string fileToStream)
 		{
-			GetVariableCommand command = new GetVariableCommand(name);
+			GetDataCommand command = new GetDataCommand(fileToStream);
+
 			processCommand(command);
 
 			return command.GetResult();
 		}
 
-		public void HangUp(HangUpCommand command)
+		public string GetData(string fileToStream, int timeout)
 		{
+			GetDataCommand command = new GetDataCommand(fileToStream, timeout);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
+		public string GetData(string fileToStream, int timeout, int maxDigits)
+		{
+			GetDataCommand command = new GetDataCommand(fileToStream, timeout, maxDigits);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
+		public string GetVariable(string variableName)
+		{
+			GetVariableCommand command = new GetVariableCommand(variableName);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
+		public void HangUp()
+		{
+			HangUpCommand command = new HangUpCommand();
+
+			processCommand(command);
+		}
+
+		public void HangUp(string channelName)
+		{
+			HangUpCommand command = new HangUpCommand(channelName);
+
 			processCommand(command);
 		}
 
@@ -239,8 +297,19 @@ namespace nAsterisk
 			processCommand(command);
 		}
 
-		public Char? ReceiveChar(ReceiveCharCommand command)
+		public Char? ReceiveChar()
 		{
+			ReceiveCharCommand command = new ReceiveCharCommand();
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
+		public Char? ReceiveChar(int timeout)
+		{
+			ReceiveCharCommand command = new ReceiveCharCommand(timeout);
+
 			processCommand(command);
 
 			return command.GetResult();
@@ -311,6 +380,16 @@ namespace nAsterisk
 			_stream.ReadTimeout = oldtimeout;
 
 			return response;
+		}
+
+		public object ProcessCommand(BaseAGICommand command)
+		{
+			this.processCommand(command);
+
+			if (command is IProvideCommandResult)
+				return ((IProvideCommandResult)command).GetResult();
+
+			return null;
 		}
 
 		private void processCommand(BaseAGICommand command)

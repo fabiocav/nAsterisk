@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public interface IProviteCommandResult
+	public interface IProvideCommandResult
 	{
 		object GetResult();
 	}

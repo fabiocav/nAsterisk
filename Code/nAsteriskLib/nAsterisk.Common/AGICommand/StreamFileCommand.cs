@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class StreamFileCommand : BaseAGICommand, IProviteCommandResult
+	internal class StreamFileCommand : BaseAGICommand, IProvideCommandResult
 	{
 		private string _filename = "";
 		private string _escapedigits = "\"\"";
@@ -85,7 +85,7 @@ namespace nAsterisk.AGICommand
 
 		#region IProviteCommandResult Members
 
-		object IProviteCommandResult.GetResult()
+		object IProvideCommandResult.GetResult()
 		{
 			return this.GetResult();
 		}

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class DatabaseGetCommand : BaseAGICommand, ISupportCommandResponse, IProviteCommandResult
+	public class DatabaseGetCommand : BaseAGICommand, ISupportCommandResponse, IProvideCommandResult
 	{
 		private string _family;
 		private string _key;
@@ -63,7 +63,7 @@ namespace nAsterisk.AGICommand
 
 		#region IProviteCommandResult Members
 
-		object IProviteCommandResult.GetResult()
+		object IProvideCommandResult.GetResult()
 		{
 			return this.GetResult();
 		}
