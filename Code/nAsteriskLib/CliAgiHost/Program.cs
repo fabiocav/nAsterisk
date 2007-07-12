@@ -14,7 +14,7 @@ namespace CliAgiHost
 		static void Main(string[] args)
 		{
 			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(EchoCallerIdScript));
+			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
 
 			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
 			TcpAgiScriptHost host = new TcpAgiScriptHost();
