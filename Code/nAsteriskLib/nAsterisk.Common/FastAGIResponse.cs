@@ -34,7 +34,7 @@ namespace nAsterisk
 
 		public static FastAGIResponse ParseResponse(string responseString)
 		{
-			Regex responseRegex = new Regex(@"^(?<ResponseCode>\d{3})\Wresult=(?<ResultCode>[^\W]*)(?:\W\((?<ResultPayload>[^)]*)\)){0,1}$", RegexOptions.Singleline);
+			Regex responseRegex = new Regex(@"^(?<ResponseCode>\d{3})\sresult=(?<ResultCode>[^\s$]*)(?:\s\((?<ResultPayload>[^)]*)\)){0,1}(?:\sendpos=(?<EndPosition>\d*)){0,1}$", RegexOptions.Singleline);
 
 			if (responseRegex.IsMatch(responseString))
 			{
