@@ -42,23 +42,20 @@ namespace nAsterisk
 		public static FastAGIResponse ParseResponse(string responseString)
 		{
 			Regex responseRegex = new Regex(@"^(?<ResponseCode>\d{3})\sresult=(?<ResultCode>[^\s$]*)(?:\s\((?<ResultPayload>[^)]*)\)){0,1}(?:\sendpos=(?<EndPosition>\d*)){0,1}$", RegexOptions.Singleline);
+			Match responseMatch = responseRegex.Match(responseString);
 
-			if (responseRegex.IsMatch(responseString))
+			if (responseMatch.Success)
 			{
 				FastAGIResponse fastAgiResponse = new FastAGIResponse();
-
-				Match responseMatch = responseRegex.Match(responseString);
 
 				fastAgiResponse._responseCode = int.Parse(responseMatch.Groups["ResponseCode"].Value);
 				fastAgiResponse._resultValue = responseMatch.Groups["ResultCode"].Value;
 
-				if (responseMatch.Groups["EndPosition"].Success)
-				{
-					fastAgiResponse._endPosition = int.Parse(responseMatch.Groups["EndPosition"].Value);
-				}
-				
-				if (responseMatch.Groups["ResultPayload"] != null)
+				if (responseMatch.Groups["ResultPayload"].Success)
 					fastAgiResponse._payload = responseMatch.Groups["ResultPayload"].Value;
+
+				if (responseMatch.Groups["EndPosition"].Success)
+					fastAgiResponse._endPosition = int.Parse(responseMatch.Groups["EndPosition"].Value);
 
 				return fastAgiResponse;
 			}
