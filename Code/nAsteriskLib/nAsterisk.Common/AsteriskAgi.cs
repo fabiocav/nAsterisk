@@ -219,8 +219,9 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
-		public string GetVariable(GetVariableCommand command)
+		public string GetVariable(string name)
 		{
+			GetVariableCommand command = new GetVariableCommand(name);
 			processCommand(command);
 
 			return command.GetResult();
