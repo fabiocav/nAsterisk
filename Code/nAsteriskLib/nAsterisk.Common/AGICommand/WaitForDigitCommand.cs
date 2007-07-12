@@ -14,6 +14,12 @@ namespace nAsterisk.AGICommand
 			_timeout = timeout;
 		}
 
+		public TimeSpan Timeout
+		{
+			get { return _timeout; }
+			set { _timeout = value; }
+		}
+
 		public override string GetCommand()
 		{
 			return string.Format("WAIT FOR DIGIT {0}", _timeout.TotalMilliseconds);
