@@ -6,14 +6,47 @@ namespace nAsterisk.AGICommand
 {
 	public class DatabasePutCommand : BaseAGICommand
 	{
+		private string _family;
+		private string _key;
+		private string _value;
+
+		public DatabasePutCommand(string family, string keyTree, string value)
+		{
+			_family = family;
+			_key = keyTree;
+		}
+
+		public string Key
+		{
+			get { return _key; }
+			set { _key = value; }
+		}
+
+		public string Family
+		{
+			get { return _family; }
+			set { _family = value; }
+		}
+
+		public string Value
+		{
+			get { return _value; }
+			set { _value = value; }
+		}
+
 		public override string GetCommand()
 		{
-			throw new Exception("The method or operation is not implemented.");
+			if (string.IsNullOrEmpty(_family) || string.IsNullOrEmpty(_key) || string.IsNullOrEmpty(_value))
+			{
+				throw new InvalidOperationException("The DatabasePutCommand requires Family, Key and Value to be set.");
+			}
+
+			return string.Format("DATABASE DELTREE {0} {1} {2}", _family, _key, _value);
 		}
 
 		public override bool IsSuccessfulResult(int result)
 		{
-			throw new Exception("The method or operation is not implemented.");
+			return result == 1;
 		}
 	}
 }
