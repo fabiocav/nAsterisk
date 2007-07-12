@@ -42,7 +42,7 @@ namespace nAsterisk.AGICommand
 				throw new InvalidOperationException("The DatabasePutCommand requires Family, Key and Value to be set.");
 			}
 
-			return string.Format("DATABASE DELTREE {0} {1} {2}", _family, _key, _value);
+			return string.Format("DATABASE PUT {0} {1} {2}", _family, _key, _value);
 		}
 
 		public override bool IsSuccessfulResult(string result)

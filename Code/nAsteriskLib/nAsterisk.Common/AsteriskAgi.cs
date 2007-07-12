@@ -229,15 +229,37 @@ namespace nAsterisk
 		private void processCommand(BaseAGICommand command)
 		{
 			this.SendCommand(command);
-			string response = this.ReadResult();
+			string response = this.ReadResponse();
 
-			if (!command.IsSuccessfulResult(response))
+			if (!command.IsSuccessfulResult(GetResult(response)))
 				throw new AsteriskException("Command Failed");
 
 			if (command is ISupportCommandResponse)
 			{
-				((ISupportCommandResponse)command).ProcessResponse(response);
+				((ISupportCommandResponse)command).ProcessResponse(GetResponsePayload(response));
 			}
+		}
+
+		private string GetResponsePayload(string response)
+		{
+			if (response.IndexOf("(") > 0)
+			{
+				int payloadStartIndex = response.IndexOf("(") + 1;
+
+				return response.Substring(payloadStartIndex, response.IndexOf(")") - payloadStartIndex);
+			}
+
+			return null;
+		}
+
+		private string GetResult(string response)
+		{
+			int resultEndIndex = response.IndexOf(" ");
+
+			if (resultEndIndex < 0)
+				return response.Substring(7);
+
+			return response.Substring(7, resultEndIndex - 7);
 		}
 
 		private void SendCommand(BaseAGICommand command)
@@ -250,7 +272,7 @@ namespace nAsterisk
 			_writer.Flush();
 		}
 
-		private string ReadResult()
+		private string ReadResponse()
 		{
 			string response = _reader.ReadLine();
 
