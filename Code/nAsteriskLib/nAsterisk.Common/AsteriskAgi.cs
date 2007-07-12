@@ -315,6 +315,12 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
+		public void SetPriority(int priority)
+		{
+			SetPriorityCommand command = new SetPriorityCommand(priority);
+			processCommand(command);
+		}
+
 		public void SetVariable(string name, string value)
 		{
 			SetVariableCommand command = new SetVariableCommand(name, value);
