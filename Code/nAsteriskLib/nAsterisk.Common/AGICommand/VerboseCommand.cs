@@ -29,7 +29,7 @@ namespace nAsterisk.AGICommand
 	
 		public override string GetCommand()
 		{
-			return string.Format("VERBOSE {0} {1}", _message, (int)_level);
+			return string.Format("VERBOSE \"{0}\" {1}", _message, (int)_level);
 		}
 
 		public override bool IsSuccessfulResult(string result)

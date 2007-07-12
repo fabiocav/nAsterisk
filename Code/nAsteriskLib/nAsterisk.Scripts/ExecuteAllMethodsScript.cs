@@ -49,8 +49,15 @@ namespace nAsterisk.Scripts
 			Console.WriteLine("Called WaitForDigit: {0}", digit);
 
 
-			agi.VerboseLog("Test Log", AsteriskVerboseLevel.Error);
+			agi.VerboseLog("Test Error Log", AsteriskVerboseLevel.Error);
+			agi.VerboseLog("Test Info Log", AsteriskVerboseLevel.Info);
+			agi.VerboseLog("Test Trace Log", AsteriskVerboseLevel.Trace);
+			agi.VerboseLog("Test Debug Log", AsteriskVerboseLevel.Debug);
 			Console.WriteLine("Called VerboseLog");
+
+
+			agi.HangUp(new HangUpCommand());
+			Console.WriteLine("Called Hangup");
 		}
 
 		#endregion
