@@ -48,6 +48,7 @@
     <Compile Include="AGICommand\GetDataCommand.cs" />
     <Compile Include="AGICommand\GetVariableCommand.cs" />
     <Compile Include="AGICommand\HangUpCommand.cs" />
+    <Compile Include="AGICommand\IProviteCommandResult.cs" />
     <Compile Include="AGICommand\ISupportCommandResponse.cs" />
     <Compile Include="AGICommand\NoopCommand.cs" />
     <Compile Include="AGICommand\ReceiveCharCommand.cs" />

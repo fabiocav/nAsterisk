@@ -180,7 +180,7 @@ namespace nAsterisk
 		{
 			processCommand(command);
 
-			return command.GetResponse();
+			return command.GetResult();
 		}
 
 		public void DatabaseDelete(DatabaseDeleteCommand command)
@@ -197,7 +197,7 @@ namespace nAsterisk
 		{
 			processCommand(command);
 
-			return command.GetResponse();
+			return command.GetResult();
 		}
 
 		public void DatabasePut(DatabasePutCommand command)
@@ -209,21 +209,21 @@ namespace nAsterisk
 		{
 			processCommand(command);
 
-			return command.GetResponse();
+			return command.GetResult();
 		}
 
 		public string GetData(GetDataCommand command)
 		{
 			processCommand(command);
 
-			return command.GetResponse();
+			return command.GetResult();
 		}
 
 		public string GetVariable(GetVariableCommand command)
 		{
 			processCommand(command);
 
-			return command.GetResponse();
+			return command.GetResult();
 		}
 
 		public void HangUp(HangUpCommand command)
@@ -242,7 +242,7 @@ namespace nAsterisk
 		{
 			processCommand(command);
 
-			return command.GetResponse();
+			return command.GetResult();
 		}
 
 		#region StreamFile overloads
@@ -251,7 +251,7 @@ namespace nAsterisk
 			StreamFileCommand command = new StreamFileCommand(filename, escapedigits, offset);
 			processCommand(command);
 
-			return command.GetResponse();
+			return command.GetResult();
 		}
 
 		public string StreamFile(string filename, string escapedigits)
@@ -259,7 +259,7 @@ namespace nAsterisk
 			StreamFileCommand command = new StreamFileCommand(filename, escapedigits);
 			processCommand(command);
 
-			return command.GetResponse();
+			return command.GetResult();
 		}
 
 		public string StreamFile(string filename, int offset)
@@ -267,7 +267,7 @@ namespace nAsterisk
 			StreamFileCommand command = new StreamFileCommand(filename, offset);
 			processCommand(command);
 
-			return command.GetResponse();
+			return command.GetResult();
 		}
 
 		public string StreamFile(string filename)
@@ -275,7 +275,7 @@ namespace nAsterisk
 			StreamFileCommand command = new StreamFileCommand(filename);
 			processCommand(command);
 
-			return command.GetResponse();
+			return command.GetResult();
 		}
 		#endregion
 
@@ -299,7 +299,7 @@ namespace nAsterisk
 			_stream.ReadTimeout = (int)timeout.TotalMilliseconds + 250;
 			
 			processCommand(command);
-			string response = command.GetResponse();
+			string response = command.GetResult();
 
 			_stream.ReadTimeout = oldtimeout;
 

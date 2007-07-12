@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class GetVariableCommand : BaseAGICommand, ISupportCommandResponse
+	public class GetVariableCommand : BaseAGICommand, ISupportCommandResponse, IProviteCommandResult
 	{
 		private string _variableName;
 		private string _variableValue;
@@ -38,7 +38,7 @@ namespace nAsterisk.AGICommand
 			return code == 1;
 		}
 
-		public string GetResponse()
+		public string GetResult()
 		{
 			return _variableName;
 		}
@@ -48,6 +48,15 @@ namespace nAsterisk.AGICommand
 		void ISupportCommandResponse.ProcessResponse(string response)
 		{
 			_variableName = response;
+		}
+
+		#endregion
+
+		#region IProviteCommandResult Members
+
+		object IProviteCommandResult.GetResult()
+		{
+			return this.GetResult();
 		}
 
 		#endregion
