@@ -40,14 +40,14 @@ namespace nAsterisk.AGICommand
 
 		public string GetResult()
 		{
-			return _variableName;
+			return _variableValue;
 		}
 
 		#region ISupportCommandResponse Members
 
 		void ISupportCommandResponse.ProcessResponse(string response)
 		{
-			_variableName = response;
+			_variableValue = response;
 		}
 
 		#endregion
