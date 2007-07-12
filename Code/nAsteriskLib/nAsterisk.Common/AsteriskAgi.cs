@@ -226,10 +226,12 @@ namespace nAsterisk
 			return command.GetResponse();
 		}
 
-		public string WaitForDigit(WaitForDigitCommand command)
+		public string WaitForDigit(TimeSpan timeout)
 		{
+			WaitForDigitCommand wfdcommand = new WaitForDigitCommand(timeout);
+
 			int oldtimeout = _stream.ReadTimeout;
-			_stream.ReadTimeout = (int)command.Timeout.TotalMilliseconds + 250;
+			_stream.ReadTimeout = (int)timeout.TotalMilliseconds + 250;
 			
 			processCommand(command);
 			string response = command.GetResponse();
