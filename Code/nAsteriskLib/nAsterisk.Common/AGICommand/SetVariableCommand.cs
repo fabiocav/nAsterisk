@@ -29,7 +29,7 @@ namespace nAsterisk.AGICommand
 
 		public override string GetCommand()
 		{
-			return string.Format("SET VARIABLE {0} {1}", _name, _value);
+			return string.Format("SET VARIABLE {0} \"{1}\"", _name, _value);
 		}
 
 		public override bool IsSuccessfulResult(string result)
