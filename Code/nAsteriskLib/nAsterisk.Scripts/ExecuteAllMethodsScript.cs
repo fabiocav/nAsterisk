@@ -76,7 +76,7 @@ namespace nAsterisk.Scripts
 			Console.WriteLine("Called GetVariable: {0}", var);
 
 
-			agi.HangUp(new HangUpCommand());
+			agi.HangUp();
 			Console.WriteLine("Called Hangup");
 		}
 
