@@ -228,9 +228,15 @@ namespace nAsterisk
 
 		public string WaitForDigit(WaitForDigitCommand command)
 		{
+			int oldtimeout = _stream.ReadTimeout;
+			_stream.ReadTimeout = (int)command.Timeout.TotalMilliseconds + 250;
+			
 			processCommand(command);
+			string response = command.GetResponse();
 
-			return command.GetResponse();
+			_stream.ReadTimeout = oldtimeout;
+
+			return response;
 		}
 
 		private void processCommand(BaseAGICommand command)

@@ -36,7 +36,6 @@ namespace nAsterisk.AGICommand
 				byte b = byte.Parse(result);
 				_digit = System.Text.ASCIIEncoding.ASCII.GetString(new byte[] { b });
 			}
-			throw new Exception("The method or operation is not implemented.");
 		}
 
 		public string GetResponse()
