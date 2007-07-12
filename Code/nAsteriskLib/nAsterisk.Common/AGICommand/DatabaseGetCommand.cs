@@ -4,10 +4,11 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class DatabaseGetCommand : BaseAGICommand
+	public class DatabaseGetCommand : BaseAGICommand, ISupportCommandResponse
 	{
 		private string _family;
 		private string _key;
+		private string _resultingValue;
 
 		public DatabaseGetCommand(string family, string key)
 		{
@@ -45,5 +46,20 @@ namespace nAsterisk.AGICommand
 
 			return code == 1;
 		}
+
+		public string GetResponse()
+		{
+			return _resultingValue;
+		}
+
+		#region ISupportCommandResponse Members
+
+		public void ProcessResponse(string response)
+		{
+			if (response.Length > 0)
+				_resultingValue = response.Substring(1, response.Length - 2);
+		}
+
+		#endregion
 	}
 }

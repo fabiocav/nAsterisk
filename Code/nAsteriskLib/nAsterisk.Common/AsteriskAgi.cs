@@ -173,27 +173,53 @@ namespace nAsterisk
 		{
 			AnswerCommand command = new AnswerCommand();
 
-			this.SendCommand(command);
-
-			this.CheckSuccess(command);
+			processCommand(command);
 		}
 
 		public ChannelStatus GetChannelStatus(GetChannelStatusCommand command)
 		{
-			this.SendCommand(command);
-
-			int ret = this.ReadIntVar();
-			return (ChannelStatus)ret;
+			processCommand(command);
+			
+			return command.GetResponse();
 		}
 
 		public void DatabaseDelete(DatabaseDeleteCommand command)
 		{
-			this.SendCommand(command);
-
-			this.CheckSuccess(command);
+			processCommand(command);
 		}
 
 		public void DatabaseDeleteTree(DatabaseDeleteTreeCommand command)
+		{
+			processCommand(command);
+		}
+
+		public string DatabaseGet(DatabaseGetCommand command)
+		{
+			processCommand(command);
+			
+			return command.GetResponse();
+		}
+
+		public void DatabasePut(DatabasePutCommand command)
+		{
+			processCommand(command);
+		}
+
+		public string Execute(ExecuteCommand command)
+		{
+			processCommand(command);
+
+			return command.GetResponse();
+		}
+
+		public string GetData(GetDataCommand command)
+		{
+			processCommand(command);
+
+			return command.GetResponse();
+		}
+
+		private void processCommand(BaseAGICommand command)
 		{
 			this.SendCommand(command);
 

@@ -8,6 +8,7 @@ namespace nAsterisk.AGICommand
 	{
 		private string _application;
 		private string _options;
+		private string _applicationReturnValue;
 
 		public ExecuteCommand(string application, string options)
 		{
@@ -32,8 +33,15 @@ namespace nAsterisk.AGICommand
 			return string.Format("EXEC {0} {1}", _application, _options);
 		}
 
+		public string GetResponse()
+		{
+			return _applicationReturnValue;
+		}
+
 		public override bool IsSuccessfulResult(string result)
 		{
+			_applicationReturnValue = result;
+
 			int code;
 			int.TryParse(result, out code);
 

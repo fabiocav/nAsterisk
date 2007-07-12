@@ -9,6 +9,7 @@ namespace nAsterisk.AGICommand
 		private string _fileToStream;
 		private int _timeout;
 		private int _maxDigits;
+		private string _resultingDtmfData;
 
 		public GetDataCommand(string fileToStream)
 			: this(fileToStream, 0, 1024) { }
@@ -61,7 +62,14 @@ namespace nAsterisk.AGICommand
 
 		public override bool IsSuccessfulResult(string result)
 		{
+			_resultingDtmfData = result;
+
 			return true;
+		}
+
+		public string GetResponse()
+		{
+			return _resultingDtmfData;
 		}
 	}
 }
