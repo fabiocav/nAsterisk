@@ -226,9 +226,15 @@ namespace nAsterisk
 			return command.GetResponse();
 		}
 
+		public string VerboseLog(string message, AsteriskVerboseLevel level)
+		{
+			VerboseCommand command = new VerboseCommand(message, level);
+			processCommand(command);
+		}
+
 		public string WaitForDigit(TimeSpan timeout)
 		{
-			WaitForDigitCommand wfdcommand = new WaitForDigitCommand(timeout);
+			WaitForDigitCommand command = new WaitForDigitCommand(timeout);
 
 			int oldtimeout = _stream.ReadTimeout;
 			_stream.ReadTimeout = (int)timeout.TotalMilliseconds + 250;

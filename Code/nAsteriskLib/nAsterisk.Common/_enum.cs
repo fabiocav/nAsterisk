@@ -15,4 +15,12 @@ namespace nAsterisk
 		Up				= 6,
 		Busy			= 7
 	}
+
+	public enum AsteriskVerboseLevel
+	{
+		Error = 1,
+		Info,
+		Trace,
+		Debug
+	}
 }

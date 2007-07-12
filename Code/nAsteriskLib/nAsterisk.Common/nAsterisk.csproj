@@ -48,6 +48,8 @@
     <Compile Include="AGICommand\GetDataCommand.cs" />
     <Compile Include="AGICommand\GetVariableCommand.cs" />
     <Compile Include="AGICommand\ISupportCommandResponse.cs" />
+    <Compile Include="AGICommand\VerboseCommand.cs" />
+    <Compile Include="AGICommand\WaitForDigitCommand.cs" />
     <Compile Include="AsteriskAgi.cs" />
     <Compile Include="AsteriskException.cs" />
     <Compile Include="Configuration\ITcpHostConfigurationSource.cs" />
