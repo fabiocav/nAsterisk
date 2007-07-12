@@ -11,9 +11,12 @@ namespace nAsterisk.AGICommand
 			return "ANSWER";
 		}
 
-		public override bool IsSuccessfulResult(int result)
+		public override bool IsSuccessfulResult(string result)
 		{
-			return result == 0;
+			int code = 1;
+			int.TryParse(result, out code);
+
+			return code == 0;
 		}
 	}
 }

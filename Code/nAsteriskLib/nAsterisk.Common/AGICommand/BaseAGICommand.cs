@@ -7,6 +7,6 @@ namespace nAsterisk.AGICommand
 	public abstract class BaseAGICommand
 	{
 		public abstract string GetCommand();
-		public abstract bool IsSuccessfulResult(int result);
+		public abstract bool IsSuccessfulResult(string result);
 	}
 }

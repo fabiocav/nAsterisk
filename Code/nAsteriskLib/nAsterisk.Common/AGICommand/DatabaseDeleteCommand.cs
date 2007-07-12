@@ -38,9 +38,12 @@ namespace nAsterisk.AGICommand
 			return string.Format("DATABASE DEL {0} {1}", _family, _key);
 		}
 
-		public override bool IsSuccessfulResult(int result)
+		public override bool IsSuccessfulResult(string result)
 		{
-			return result == 1;
+			int code = 0;
+			int.TryParse(result, out code);
+
+			return code == 1;
 		}
 	}
 }

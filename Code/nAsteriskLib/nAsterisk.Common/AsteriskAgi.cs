@@ -219,9 +219,10 @@ namespace nAsterisk
 
 			if (result == 200)
 			{
-				int ret = int.Parse(var.Substring(var.IndexOf("result=") + 7, 1));
+				int resultIndex = var.IndexOf("result=") + 7;
+				string resultValue = var.Substring(resultIndex, var.IndexOf(" ",resultIndex));
 
-				if (!command.IsSuccessfulResult(ret))
+				if (!command.IsSuccessfulResult(resultValue))
 					throw new AsteriskException("Command Failed");
 
 				if (command is ISupportCommandResponse)

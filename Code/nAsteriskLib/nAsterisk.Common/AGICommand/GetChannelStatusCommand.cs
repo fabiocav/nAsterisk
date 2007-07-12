@@ -7,6 +7,7 @@ namespace nAsterisk.AGICommand
 	public class GetChannelStatusCommand : BaseAGICommand, ISupportCommandResponse
 	{
 		private string _channelName;
+		private ChannelStatus _channelStatus;
 
 		public GetChannelStatusCommand()
 			: this(string.Empty) { }
@@ -31,8 +32,10 @@ namespace nAsterisk.AGICommand
 			return command;
 		}
 
-		public override bool IsSuccessfulResult(int result)
+		public override bool IsSuccessfulResult(string result)
 		{
+
+			_channelStatus = (ChannelStatus)Enum.Parse(typeof(ChannelStatus), result);
 			return true; 
 		}
 
