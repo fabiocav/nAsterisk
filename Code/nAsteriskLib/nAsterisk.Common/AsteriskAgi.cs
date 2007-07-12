@@ -328,41 +328,20 @@ namespace nAsterisk
 
 		private void processCommand(BaseAGICommand command)
 		{
-			this.SendCommand(command);
-			string response = this.ReadResponse();
+			this.sendCommand(command);
 
-			if (!command.IsSuccessfulResult(GetResult(response)))
+			FastAGIResponse response = this.readResponse();
+
+			if (!command.IsSuccessfulResult(response.ResultValue))
 				throw new AsteriskException("Command Failed");
 
 			if (command is ISupportCommandResponse)
 			{
-				((ISupportCommandResponse)command).ProcessResponse(GetResponsePayload(response));
+				((ISupportCommandResponse)command).ProcessResponse(response.Payload);
 			}
 		}
 
-		private string GetResponsePayload(string response)
-		{
-			if (response.IndexOf("(") > 0)
-			{
-				int payloadStartIndex = response.IndexOf("(") + 1;
-
-				return response.Substring(payloadStartIndex, response.IndexOf(")") - payloadStartIndex);
-			}
-
-			return null;
-		}
-
-		private string GetResult(string response)
-		{
-			int resultEndIndex = response.IndexOf(" ");
-
-			if (resultEndIndex < 0)
-				return response.Substring(7);
-
-			return response.Substring(7, resultEndIndex - 7);
-		}
-
-		private void SendCommand(BaseAGICommand command)
+		private void sendCommand(BaseAGICommand command)
 		{
 			string commandString = command.GetCommand();
 
@@ -372,17 +351,18 @@ namespace nAsterisk
 			_writer.Flush();
 		}
 
-		private string ReadResponse()
+		private FastAGIResponse readResponse()
 		{
 			string response = _reader.ReadLine();
 
-			int resultCode = int.Parse(response.Substring(0, 3));
-			if (resultCode != 200)
+			FastAGIResponse agiResponse = FastAGIResponse.ParseResponse(response);
+
+			if (agiResponse.ResponseCode != 200)
 			{
 				throw new AsteriskException(response.Substring(4));
 			}
 
-			return response.Substring(4);
+			return agiResponse;
 		}
 		#endregion
 	}
