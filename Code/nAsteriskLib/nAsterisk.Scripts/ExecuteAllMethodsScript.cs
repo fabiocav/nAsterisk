@@ -21,7 +21,7 @@ namespace nAsterisk.Scripts
 
 			DatabasePutCommand dpcommand = new DatabasePutCommand("test", "blah", "foobar");
 			agi.DatabasePut(dpcommand);
-			Console.WriteLine("Called DatabasePut");
+			Console.WriteLine("Called DatabasePut set var to 'foobar'");
 
 
 			DatabaseGetCommand dgcommand = new DatabaseGetCommand("test", "blah");
@@ -32,9 +32,25 @@ namespace nAsterisk.Scripts
 			DatabaseDeleteCommand ddcommand = new DatabaseDeleteCommand("test", "blah");
 			agi.DatabaseDelete(ddcommand);
 			Console.WriteLine("Called DatabaseDelete");
-			
+			// Test that the Delete worked
+			try
+			{
+				var = agi.DatabaseGet(dgcommand);
+				Console.WriteLine("DatabaseGet Succeded, it shouldn't have: {0}", var);
+			}
+			catch (AsteriskException)
+			{
+				Console.WriteLine("DatabaseGet Failed, this is good.");
+			}
 
 
+			Console.WriteLine("Waiting 2 seconds for digit");
+			string digit = agi.WaitForDigit(TimeSpan.FromSeconds(2));
+			Console.WriteLine("Called WaitForDigit: {0}", digit);
+
+
+			agi.VerboseLog("Test Log", AsteriskVerboseLevel.Error);
+			Console.WriteLine("Called VerboseLog");
 		}
 
 		#endregion
