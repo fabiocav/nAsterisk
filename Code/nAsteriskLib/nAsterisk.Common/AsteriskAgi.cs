@@ -226,6 +226,25 @@ namespace nAsterisk
 			return command.GetResponse();
 		}
 
+		public void HangUp(HangUpCommand command)
+		{
+			processCommand(command);
+		}
+
+		public void Noop()
+		{
+			NoopCommand command = new NoopCommand();
+
+			processCommand(command);
+		}
+
+		public Char? ReceiveChar(ReceiveCharCommand command)
+		{
+			processCommand(command);
+
+			return command.GetResponse();
+		}
+
 		public string VerboseLog(string message, AsteriskVerboseLevel level)
 		{
 			VerboseCommand command = new VerboseCommand(message, level);
