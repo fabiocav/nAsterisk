@@ -76,7 +76,6 @@ namespace nAsterisk
 			
 			if (client != null)
 			{
-				client.ReceiveTimeout = 250;
 				this.DispatchScript(client);
 
 				// Restart the Accept
