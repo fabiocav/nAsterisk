@@ -52,6 +52,7 @@
     <Compile Include="AGICommand\ISupportCommandResponse.cs" />
     <Compile Include="AGICommand\NoopCommand.cs" />
     <Compile Include="AGICommand\ReceiveCharCommand.cs" />
+    <Compile Include="AGICommand\SetVariableCommand.cs" />
     <Compile Include="AGICommand\StreamFileCommand.cs" />
     <Compile Include="AGICommand\TDDModeCommand.cs" />
     <Compile Include="AGICommand\VerboseCommand.cs" />

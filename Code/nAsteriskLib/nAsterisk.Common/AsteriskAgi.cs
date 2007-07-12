@@ -245,6 +245,12 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
+		public void SetVariable(string name, string value)
+		{
+			SetVariableCommand command = new SetVariableCommand(name, value);
+			processCommand(command);
+		}
+
 		#region StreamFile overloads
 		public string StreamFile(string filename, string escapedigits, int offset)
 		{
