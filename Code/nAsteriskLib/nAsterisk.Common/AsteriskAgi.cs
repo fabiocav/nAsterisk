@@ -315,6 +315,12 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
+		public void EnableMusic(bool enabled)
+		{
+			EnableMusicCommand command = new EnableMusicCommand(enabled);
+			processCommand(command);
+		}
+
 		public void SetPriority(int priority)
 		{
 			SetPriorityCommand command = new SetPriorityCommand(priority);
