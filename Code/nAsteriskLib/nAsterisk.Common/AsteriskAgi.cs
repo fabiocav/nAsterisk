@@ -532,7 +532,7 @@ namespace nAsterisk
 
 			if (command is ISupportCommandResponse)
 			{
-				((ISupportCommandResponse)command).ProcessResponse(response.Payload);
+				((ISupportCommandResponse)command).ProcessResponse(response);
 			}
 		}
 
