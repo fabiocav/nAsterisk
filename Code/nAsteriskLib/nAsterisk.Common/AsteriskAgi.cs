@@ -384,6 +384,13 @@ namespace nAsterisk
 			processCommand(command);
 		}
 
+		public void SetCallerID(string number)
+		{
+			SetCallerIDCommand command = new SetCallerIDCommand(number);
+
+			processCommand(command);
+		}
+
 		public void EnableMusic(bool enabled)
 		{
 			EnableMusicCommand command = new EnableMusicCommand(enabled);
