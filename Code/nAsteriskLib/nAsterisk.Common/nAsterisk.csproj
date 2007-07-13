@@ -62,6 +62,7 @@
     <Compile Include="AGICommand\SendTextCommand.cs" />
     <Compile Include="AGICommand\SetAutoHangUpCommand.cs" />
     <Compile Include="AGICommand\SetCallerIDCommand.cs" />
+    <Compile Include="AGICommand\SetContextCommand.cs" />
     <Compile Include="AGICommand\SetExtensionCommand.cs" />
     <Compile Include="AGICommand\SetPriorityCommand.cs" />
     <Compile Include="AGICommand\SetVariableCommand.cs" />

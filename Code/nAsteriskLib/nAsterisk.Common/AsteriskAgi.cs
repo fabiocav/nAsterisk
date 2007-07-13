@@ -403,6 +403,12 @@ namespace nAsterisk
 			processCommand(command);
 		}
 
+		public void SetContext(string context)
+		{
+			SetContextCommand command = new SetContextCommand(context);
+			processCommand(command);
+		}
+
 		public void SetExtension(string extension)
 		{
 			SetExtensionCommand command = new SetExtensionCommand(extension);
