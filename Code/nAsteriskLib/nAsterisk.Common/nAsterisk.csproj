@@ -59,6 +59,7 @@
     <Compile Include="AGICommand\TDDModeCommand.cs" />
     <Compile Include="AGICommand\VerboseCommand.cs" />
     <Compile Include="AGICommand\WaitForDigitCommand.cs" />
+    <Compile Include="AGICommand\_enum.cs" />
     <Compile Include="AsteriskAgi.cs" />
     <Compile Include="AsteriskException.cs" />
     <Compile Include="Configuration\ITcpHostConfigurationSource.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="IAgiScriptHost.cs" />
     <Compile Include="IAsteriskAgiScript.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AGICommand\SayAlphaCommand.cs" />
     <Compile Include="TcpAgiScriptHost.cs" />
     <Compile Include="_enum.cs" />
   </ItemGroup>

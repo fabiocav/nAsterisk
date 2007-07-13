@@ -442,6 +442,27 @@ namespace nAsterisk
 
 			return agiResponse;
 		}
+
+		public static string GetEscapeDigitsString(EscapeDigits escapeDigits)
+		{
+			StringBuilder sb = new StringBuilder();
+
+			if ((escapeDigits & EscapeDigits.Zero) == EscapeDigits.Zero) sb.Append('0');
+			if ((escapeDigits & EscapeDigits.One) == EscapeDigits.One) sb.Append('1');
+			if ((escapeDigits & EscapeDigits.Two) == EscapeDigits.Two) sb.Append('2');
+			if ((escapeDigits & EscapeDigits.Three) == EscapeDigits.Three) sb.Append('3');
+			if ((escapeDigits & EscapeDigits.Four) == EscapeDigits.Four) sb.Append('4');
+			if ((escapeDigits & EscapeDigits.Five) == EscapeDigits.Five) sb.Append('5');
+			if ((escapeDigits & EscapeDigits.Six) == EscapeDigits.Six) sb.Append('6');
+			if ((escapeDigits & EscapeDigits.Seven) == EscapeDigits.Seven) sb.Append('7');
+			if ((escapeDigits & EscapeDigits.Eight) == EscapeDigits.Eight) sb.Append('8');
+			if ((escapeDigits & EscapeDigits.Nine) == EscapeDigits.Nine) sb.Append('9');
+			if ((escapeDigits & EscapeDigits.Pound) == EscapeDigits.Pound) sb.Append('#');
+			if ((escapeDigits & EscapeDigits.Asterisk) == EscapeDigits.Asterisk) sb.Append('*');
+
+			return sb.ToString();
+		}
+
 		#endregion
 	}
 }
