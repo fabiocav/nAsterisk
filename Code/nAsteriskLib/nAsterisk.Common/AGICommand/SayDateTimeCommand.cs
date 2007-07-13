@@ -126,7 +126,7 @@ namespace nAsterisk.AGICommand
 			else if (string.IsNullOrEmpty(_format) || string.IsNullOrEmpty(_timeZone))
 				commandFormat = "SAY DATETIME {0} {1} {3}"; // TODO: This is going to need testing I'm not 100% sure asterisk will be able to tell if {3} is a timezone or a format.
 
-			return string.Format(commandFormat, (_time.ToUniversalTime() - (new DateTime(1970,1,1,0,0,0))).TotalSeconds, AsteriskAgi.GetDigitsString(_escapeDigits), _format, _timeZone);
+			return string.Format(commandFormat, (_time - (new DateTime(1970,1,1,0,0,0))).TotalSeconds, AsteriskAgi.GetDigitsString(_escapeDigits), _format, _timeZone);
 		}
 
 		public override bool IsSuccessfulResult(string result)
