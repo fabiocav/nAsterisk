@@ -390,6 +390,14 @@ namespace nAsterisk
 			processCommand(command);
 		}
 
+		public string ReceiveText(int timeout)
+		{
+			ReceiveTextCommand command = new ReceiveTextCommand(timeout);
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
 		public void SetCallerID(string number)
 		{
 			SetCallerIDCommand command = new SetCallerIDCommand(number);
