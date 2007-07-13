@@ -54,6 +54,7 @@
     <Compile Include="AGICommand\ReceiveCharCommand.cs" />
     <Compile Include="AGICommand\SayDigitsCommand.cs" />
     <Compile Include="AGICommand\EnableMusicCommand.cs" />
+    <Compile Include="AGICommand\SayPhoneticCommand.cs" />
     <Compile Include="AGICommand\SetPriorityCommand.cs" />
     <Compile Include="AGICommand\SetVariableCommand.cs" />
     <Compile Include="AGICommand\StreamFileCommand.cs" />

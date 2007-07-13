@@ -315,9 +315,27 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
+		public Digits SayAlpha(string chars, Digits escapeDigits)
+		{
+			SayAlphaCommand command = new SayAlphaCommand(chars, escapeDigits);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
 		public string SayDigits(Digits number, Digits escapeDigits)
 		{
 			SayDigitsCommand command = new SayDigitsCommand(number, escapeDigits);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
+		public Digits SayPhonetic(string message, Digits escapeDigits)
+		{
+			SayPhoneticCommand command = new SayPhoneticCommand(message, escapeDigits);
 
 			processCommand(command);
 
