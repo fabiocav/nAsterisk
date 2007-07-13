@@ -4,23 +4,16 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class SayAlphaCommand : BaseAGICommand, IProvideCommandResult
+	public class SayDigitsCommand : BaseAGICommand, IProvideCommandResult
 	{
-		private string _chars;
+		private Digits _number;
+		private Digits _escapeDigits;
 		private string _pressedDigit;
 
-		private Digits _escapeDigits;
-
-		public SayAlphaCommand(string chars, Digits escapeDigits)
+		public SayDigitsCommand(Digits number, Digits escapeDigits)
 		{
-			_chars = chars;
+			_number = number;
 			_escapeDigits = escapeDigits;
-		}
-
-		public string Chars
-		{
-			get { return _chars; }
-			set { _chars = value; }
 		}
 
 		public Digits EscapeDigits
@@ -29,9 +22,16 @@ namespace nAsterisk.AGICommand
 			set { _escapeDigits = value; }
 		}
 
+		public Digits Number
+		{
+			get { return _number; }
+			set { _number = value; }
+		}
+
+
 		public override string GetCommand()
 		{
-			return string.Format("SAY ALPHA \"{0}\" \"{1}\"", _chars, AsteriskAgi.GetDigitsString(_escapeDigits));
+			return string.Format("SAY DIGITS {0} {1}", AsteriskAgi.GetDigitsString(_number), AsteriskAgi.GetDigitsString(_escapeDigits));
 		}
 
 		public override bool IsSuccessfulResult(string result)
@@ -42,7 +42,7 @@ namespace nAsterisk.AGICommand
 			if (code > 0)
 				_pressedDigit = ((Char)code).ToString();
 
-			return (code != -1);
+			return code != -1;
 		}
 
 		public string GetResult()

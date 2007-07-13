@@ -315,6 +315,15 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
+		public string SayDigits(Digits number, Digits escapeDigits)
+		{
+			SayDigitsCommand command = new SayDigitsCommand(number, escapeDigits);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
 		public void EnableMusic(bool enabled)
 		{
 			EnableMusicCommand command = new EnableMusicCommand(enabled);
