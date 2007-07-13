@@ -6,6 +6,6 @@ namespace nAsterisk.AGICommand
 {
 	public interface ISupportCommandResponse
 	{
-		void ProcessResponse(string response);
+		void ProcessResponse(FastAGIResponse response);
 	}
 }
