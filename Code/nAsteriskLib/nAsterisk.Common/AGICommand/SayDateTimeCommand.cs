@@ -9,17 +9,12 @@ namespace nAsterisk.AGICommand
 		private string _format;
 		private string _timeZone;
 
+		private Digits _pressedDigit;
 		private Digits _escapeDigits;
 		private DateTime _time;
 
 		public SayDateTimeCommand(DateTime time, Digits escapeDigits)
 			: this(time, escapeDigits, null, null) { }
-
-		public SayDateTimeCommand(DateTime time, Digits escapeDigits, string timeZone)
-			: this(time, escapeDigits, timeZone, null) { }
-
-		public SayDateTimeCommand(DateTime time, Digits escapeDigits, string format)
-			: this(time, escapeDigits, null, format) { }
 
 		public SayDateTimeCommand(DateTime time, Digits escapeDigits, string format, string timeZone)
 		{
