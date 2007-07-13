@@ -52,6 +52,7 @@
     <Compile Include="AGICommand\ISupportCommandResponse.cs" />
     <Compile Include="AGICommand\NoopCommand.cs" />
     <Compile Include="AGICommand\ReceiveCharCommand.cs" />
+    <Compile Include="AGICommand\SayDateCommand.cs" />
     <Compile Include="AGICommand\SayDateTimeCommand.cs" />
     <Compile Include="AGICommand\SayDigitsCommand.cs" />
     <Compile Include="AGICommand\EnableMusicCommand.cs" />

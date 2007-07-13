@@ -333,6 +333,15 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
+		public Digits SayDate(DateTime date, Digits escapeDigits)
+		{
+			SayDateCommand command = new SayDateCommand(date, escapeDigits);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
 		public Digits SayDateTime(DateTime time, Digits escapeDigits)
 		{
 			return sayDateTime(new SayDateTimeCommand(time, escapeDigits));
