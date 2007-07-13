@@ -443,7 +443,7 @@ namespace nAsterisk
 			return agiResponse;
 		}
 
-		public static string GetEscapeDigitsString(Digits escapeDigits)
+		public static string GetDigitsString(Digits escapeDigits)
 		{
 			StringBuilder sb = new StringBuilder();
 
