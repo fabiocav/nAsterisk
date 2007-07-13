@@ -333,6 +333,33 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
+		public Digits SayDateTime(DateTime time, Digits escapeDigits)
+		{
+			return sayDateTime(new SayDateTimeCommand(time, escapeDigits));
+		}
+
+		public Digits SayDateTime(DateTime time, Digits escapeDigits, string timezone)
+		{
+			return sayDateTime(new SayDateTimeCommand(time, escapeDigits, timeZone));
+		}
+
+		public Digits SayDateTime(DateTime time, Digits escapeDigits, string format)
+		{
+			return sayDateTime(new SayDateTimeCommand(time, escapeDigits, format));
+		}
+
+		public Digits SayDateTime(DateTime time, Digits escapeDigits, string format, string timezone)
+		{
+			return sayDateTime(new SayDateTimeCommand(time, escapeDigits, format, timezone));
+		}
+
+		private Digits sayDateTime(SayDateTimeCommand command)
+		{
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
 		public Digits SayPhonetic(string message, Digits escapeDigits)
 		{
 			SayPhoneticCommand command = new SayPhoneticCommand(message, escapeDigits);
