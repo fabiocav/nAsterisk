@@ -78,6 +78,7 @@
     <Compile Include="Configuration\ITcpHostConfigurationSource.cs" />
     <Compile Include="Configuration\ProgramaticTcpHostConfigurationSource.cs" />
     <Compile Include="FastAGIResponse.cs" />
+    <Compile Include="HangupException.cs" />
     <Compile Include="IAgiScriptHost.cs" />
     <Compile Include="IAsteriskAgiScript.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
