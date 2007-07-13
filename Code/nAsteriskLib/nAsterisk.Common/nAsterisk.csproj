@@ -52,6 +52,8 @@
     <Compile Include="AGICommand\ISupportCommandResponse.cs" />
     <Compile Include="AGICommand\NoopCommand.cs" />
     <Compile Include="AGICommand\ReceiveCharCommand.cs" />
+    <Compile Include="AGICommand\RecordFileCommand.cs" />
+    <Compile Include="AGICommand\RecordingFormats.cs" />
     <Compile Include="AGICommand\ReceiveTextCommand.cs" />
     <Compile Include="AGICommand\SayDateCommand.cs" />
     <Compile Include="AGICommand\SayDateTimeCommand.cs" />

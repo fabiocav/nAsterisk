@@ -511,6 +511,79 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
+		public string RecordFile(string fileName, string format, Digits escapeDigits, int timeout)
+		{
+			RecordFileCommand command = new RecordFileCommand(fileName, format, escapeDigits, timeout);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
+
+		public string RecordFile(string fileName, string format, Digits escapeDigits, int? silence, int timeout)
+		{
+			RecordFileCommand command = new RecordFileCommand(fileName, format, escapeDigits, timeout, silence, timeout);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
+		public string RecordFile(string fileName, string format, Digits escapeDigits, int timeout, bool beep)
+		{
+			RecordFileCommand command = new RecordFileCommand(fileName, format, escapeDigits, timeout, beep);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
+		public string RecordFile(string fileName, string format, Digits escapeDigits, int timeout, bool beep, int? silence)
+		{
+			RecordFileCommand command = new RecordFileCommand(fileName, format, escapeDigits, timeout, beep, silence);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
+		public string RecordFile(string fileName, string format, Digits escapeDigits, int timeout, int? offsetSamples)
+		{
+			RecordFileCommand command = new RecordFileCommand(fileName, format, escapeDigits, timeout, offsetSamples);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+		
+		public string RecordFile(string fileName, string format, Digits escapeDigits, int timeout, int? offsetSamples, int? silence)
+		{
+			RecordFileCommand command = new RecordFileCommand(fileName, format, escapeDigits, timeout, offsetSamples, silence);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
+		public string RecordFile(string fileName, string format, Digits escapeDigits, int timeout, int? offsetSamples, bool beep)
+		{
+			RecordFileCommand command = new RecordFileCommand(fileName, format, escapeDigits, timeout, offsetSamples, beep);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
+		public string RecordFile(string fileName, string format, Digits escapeDigits, int timeout, int? offsetSamples, bool beep, int? silence)
+		{
+			RecordFileCommand command = new RecordFileCommand(fileName, format, escapeDigits, timeout, offsetSamples, beep, silence);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
 		public object ProcessCommand(BaseAGICommand command)
 		{
 			this.processCommand(command);
