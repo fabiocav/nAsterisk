@@ -99,7 +99,7 @@ namespace nAsterisk.AGICommand
 			string beepString = _beep ? " beep" : string.Empty;
 			string offsetSampleString = _offsetSample != null ? string.Format(" {0}", _offsetSample) : string.Empty;
 
-			return string.Format("RECORD FILE {0} {1} {2} {3}{4}{5}{6}", _fileName, _format, AsteriskAgi.GetDigitsString(_escapeDigits),
+			return string.Format("RECORD FILE {0} {1} {2} {3}{4}{5}{6}", _fileName, _format, AsteriskAGI.GetDigitsString(_escapeDigits),
 				_timeout, offsetSampleString, beepString, silenceString);
 		}
 

@@ -58,19 +58,19 @@ namespace nAsterisk
 
 			if (responseMatch.Success)
 			{
-				FastAGIResponse fastAgiResponse = new FastAGIResponse();
+				FastAGIResponse fastAGIResponse = new FastAGIResponse();
 
-				fastAgiResponse._rawResponse = responseString;
-				fastAgiResponse._responseCode = int.Parse(responseMatch.Groups["ResponseCode"].Value);
-				fastAgiResponse._resultValue = responseMatch.Groups["ResultCode"].Value;
+				fastAGIResponse._rawResponse = responseString;
+				fastAGIResponse._responseCode = int.Parse(responseMatch.Groups["ResponseCode"].Value);
+				fastAGIResponse._resultValue = responseMatch.Groups["ResultCode"].Value;
 
 				if (responseMatch.Groups["ResultPayload"].Success)
-					fastAgiResponse._payload = responseMatch.Groups["ResultPayload"].Value;
+					fastAGIResponse._payload = responseMatch.Groups["ResultPayload"].Value;
 
 				if (responseMatch.Groups["EndPosition"].Success)
-					fastAgiResponse._endPosition = int.Parse(responseMatch.Groups["EndPosition"].Value);
+					fastAGIResponse._endPosition = int.Parse(responseMatch.Groups["EndPosition"].Value);
 
-				return fastAgiResponse;
+				return fastAGIResponse;
 			}
 
 			throw new ArgumentException("The response string argument was invalid.");

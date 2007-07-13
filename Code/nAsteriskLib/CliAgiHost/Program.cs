@@ -7,7 +7,7 @@ using nAsterisk;
 using nAsterisk.Configuration;
 using nAsterisk.Scripts;
 
-namespace CliAgiHost
+namespace CliAGIHost
 {
 	class Program
 	{
@@ -17,7 +17,7 @@ namespace CliAgiHost
 			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
 
 			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAgiScriptHost host = new TcpAgiScriptHost();
+			TcpAGIScriptHost host = new TcpAGIScriptHost();
 			host.Configure(config);
 			host.Start();
 			

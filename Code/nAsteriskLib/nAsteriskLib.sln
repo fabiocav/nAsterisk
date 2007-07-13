@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nAsterisk", "nAsterisk.Common\nAsterisk.csproj", "{44082AD5-D04F-462F-9681-71C927CAA105}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CliAgiHost", "CliAgiHost\CliAgiHost.csproj", "{6A277CAE-9F5D-42EC-8D9D-A759F198E3C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CliAGIHost", "CliAgiHost\CliAGIHost.csproj", "{6A277CAE-9F5D-42EC-8D9D-A759F198E3C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nAsterisk.Scripts", "nAsterisk.Scripts\nAsterisk.Scripts.csproj", "{86AEC336-FBD9-488B-A1F1-FC118C44A952}"
 EndProject

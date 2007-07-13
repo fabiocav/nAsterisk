@@ -30,7 +30,7 @@ namespace nAsterisk.AGICommand
 
 		public override string GetCommand()
 		{
-			return string.Format("SAY NUMBER {0} {1}", _number.ToString(), AsteriskAgi.GetDigitsString(_escapeDigits));
+			return string.Format("SAY NUMBER {0} {1}", _number.ToString(), AsteriskAGI.GetDigitsString(_escapeDigits));
 		}
 
 		public override bool IsSuccessfulResult(string result)
@@ -39,7 +39,7 @@ namespace nAsterisk.AGICommand
 			int.TryParse(result, out code);
 
 			if (code > 0)
-				_pressedDigit = AsteriskAgi.GetDigitsFromString(((Char)code).ToString());
+				_pressedDigit = AsteriskAGI.GetDigitsFromString(((Char)code).ToString());
 
 			return code != -1;
 		}

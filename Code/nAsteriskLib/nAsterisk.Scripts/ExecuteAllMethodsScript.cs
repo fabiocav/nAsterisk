@@ -5,11 +5,11 @@ using nAsterisk.AGICommand;
 
 namespace nAsterisk.Scripts
 {
-	public class ExecuteAllMethodsScript : IAsteriskAgiScript
+	public class ExecuteAllMethodsScript : IAsteriskAGIScript
 	{
-		#region IAsteriskAgiScript Members
+		#region IAsteriskAGIScript Members
 
-		public void Execute(AsteriskAgi agi, Dictionary<string, string> vars)
+		public void Execute(AsteriskAGI agi, Dictionary<string, string> vars)
 		{
 			agi.Answer();
 			Console.WriteLine("Called Answer");

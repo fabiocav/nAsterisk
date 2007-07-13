@@ -4,11 +4,11 @@ using System.Text;
 
 namespace nAsterisk.Scripts
 {
-	public class EchoCallerIdScript : IAsteriskAgiScript
+	public class EchoCallerIdScript : IAsteriskAGIScript
 	{
-		#region IAsteriskAgiScript Members
+		#region IAsteriskAGIScript Members
 
-		public void Execute(AsteriskAgi agi, Dictionary<string, string> vars)
+		public void Execute(AsteriskAGI agi, Dictionary<string, string> vars)
 		{
 			agi.Answer();
 

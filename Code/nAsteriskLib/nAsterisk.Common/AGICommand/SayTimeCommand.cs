@@ -39,7 +39,7 @@ namespace nAsterisk.AGICommand
 			int.TryParse(result, out code);
 
 			if (code > 0)
-				_pressedDigit = AsteriskAgi.GetDigitsFromString(((Char)code).ToString());
+				_pressedDigit = AsteriskAGI.GetDigitsFromString(((Char)code).ToString());
 
 			return (code != -1);
 		}

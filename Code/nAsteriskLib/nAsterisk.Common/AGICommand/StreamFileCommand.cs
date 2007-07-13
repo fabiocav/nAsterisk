@@ -72,7 +72,7 @@ namespace nAsterisk.AGICommand
 			else
 			{
 				char cdigit = (char)int.Parse(result);
-				_digit = AsteriskAgi.GetDigitsFromString(new string(cdigit, 1));
+				_digit = AsteriskAGI.GetDigitsFromString(new string(cdigit, 1));
 
 				return true;
 			}
