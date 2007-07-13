@@ -59,6 +59,7 @@
     <Compile Include="AGICommand\SayNumberCommand.cs" />
     <Compile Include="AGICommand\SayPhoneticCommand.cs" />
     <Compile Include="AGICommand\SayTimeCommand.cs" />
+    <Compile Include="AGICommand\SendImageCommand.cs" />
     <Compile Include="AGICommand\SendTextCommand.cs" />
     <Compile Include="AGICommand\SetAutoHangUpCommand.cs" />
     <Compile Include="AGICommand\SetCallerIDCommand.cs" />
