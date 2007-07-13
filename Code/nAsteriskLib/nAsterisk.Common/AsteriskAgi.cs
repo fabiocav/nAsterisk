@@ -19,7 +19,6 @@ namespace nAsterisk
 		#region constructor
 		public AsteriskAgi(Stream stream)
 		{
-
 			_stream = stream;
 			_writer = new StreamWriter(_stream, System.Text.ASCIIEncoding.ASCII);
 			_reader = new StreamReader(_stream, System.Text.ASCIIEncoding.ASCII);
@@ -366,6 +365,13 @@ namespace nAsterisk
 			processCommand(command);
 
 			return command.GetResult();
+		}
+
+		public void SetAutoHangUp(int time)
+		{
+			SetAutoHangUpCommand command = new SetAutoHangUpCommand(time);
+
+			processCommand(command);
 		}
 
 		public Digits SayTime(DateTime time, Digits escapeDigits)
