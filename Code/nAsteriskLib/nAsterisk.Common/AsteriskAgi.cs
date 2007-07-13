@@ -443,22 +443,22 @@ namespace nAsterisk
 			return agiResponse;
 		}
 
-		public static string GetDigitsString(Digits escapeDigits)
+		public static string GetDigitsString(Digits digits)
 		{
 			StringBuilder sb = new StringBuilder();
 
-			if ((escapeDigits & Digits.Zero) == Digits.Zero) sb.Append('0');
-			if ((escapeDigits & Digits.One) == Digits.One) sb.Append('1');
-			if ((escapeDigits & Digits.Two) == Digits.Two) sb.Append('2');
-			if ((escapeDigits & Digits.Three) == Digits.Three) sb.Append('3');
-			if ((escapeDigits & Digits.Four) == Digits.Four) sb.Append('4');
-			if ((escapeDigits & Digits.Five) == Digits.Five) sb.Append('5');
-			if ((escapeDigits & Digits.Six) == Digits.Six) sb.Append('6');
-			if ((escapeDigits & Digits.Seven) == Digits.Seven) sb.Append('7');
-			if ((escapeDigits & Digits.Eight) == Digits.Eight) sb.Append('8');
-			if ((escapeDigits & Digits.Nine) == Digits.Nine) sb.Append('9');
-			if ((escapeDigits & Digits.Pound) == Digits.Pound) sb.Append('#');
-			if ((escapeDigits & Digits.Asterisk) == Digits.Asterisk) sb.Append('*');
+			if ((digits & Digits.Zero) == Digits.Zero) sb.Append('0');
+			if ((digits & Digits.One) == Digits.One) sb.Append('1');
+			if ((digits & Digits.Two) == Digits.Two) sb.Append('2');
+			if ((digits & Digits.Three) == Digits.Three) sb.Append('3');
+			if ((digits & Digits.Four) == Digits.Four) sb.Append('4');
+			if ((digits & Digits.Five) == Digits.Five) sb.Append('5');
+			if ((digits & Digits.Six) == Digits.Six) sb.Append('6');
+			if ((digits & Digits.Seven) == Digits.Seven) sb.Append('7');
+			if ((digits & Digits.Eight) == Digits.Eight) sb.Append('8');
+			if ((digits & Digits.Nine) == Digits.Nine) sb.Append('9');
+			if ((digits & Digits.Pound) == Digits.Pound) sb.Append('#');
+			if ((digits & Digits.Asterisk) == Digits.Asterisk) sb.Append('*');
 
 			return sb.ToString();
 		}
