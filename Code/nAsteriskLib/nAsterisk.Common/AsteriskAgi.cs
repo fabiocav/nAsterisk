@@ -324,7 +324,7 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
-		public string SayDigits(Digits number, Digits escapeDigits)
+		public Digits SayDigits(Digits number, Digits escapeDigits)
 		{
 			SayDigitsCommand command = new SayDigitsCommand(number, escapeDigits);
 
@@ -419,6 +419,15 @@ namespace nAsterisk
 			_stream.ReadTimeout = oldtimeout;
 
 			return response;
+		}
+
+		public Digits SayNumber(int number, Digits escapeDigits)
+		{
+			SayNumberCommand command = new SayNumberCommand(number, escapeDigits);
+
+			processCommand(command);
+
+			return command.GetResult();
 		}
 
 		public object ProcessCommand(BaseAGICommand command)

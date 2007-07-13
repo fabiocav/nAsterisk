@@ -4,13 +4,13 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class SayDigitsCommand : BaseAGICommand, IProvideCommandResult
+	public class SayNumberCommand : BaseAGICommand, IProvideCommandResult
 	{
-		private Digits _number;
+		private int _number;
 		private Digits _escapeDigits;
 		private Digits _pressedDigit;
 
-		public SayDigitsCommand(Digits number, Digits escapeDigits)
+		public SayNumberCommand(int number, Digits escapeDigits)
 		{
 			_number = number;
 			_escapeDigits = escapeDigits;
@@ -22,16 +22,15 @@ namespace nAsterisk.AGICommand
 			set { _escapeDigits = value; }
 		}
 
-		public Digits Number
+		public int Number
 		{
 			get { return _number; }
 			set { _number = value; }
 		}
 
-
 		public override string GetCommand()
 		{
-			return string.Format("SAY DIGITS {0} {1}", AsteriskAgi.GetDigitsString(_number), AsteriskAgi.GetDigitsString(_escapeDigits));
+			return string.Format("SAY NUMBER {0} {1}", _number.ToString(), AsteriskAgi.GetDigitsString(_escapeDigits));
 		}
 
 		public override bool IsSuccessfulResult(string result)
