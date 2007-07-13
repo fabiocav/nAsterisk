@@ -54,9 +54,9 @@ namespace nAsterisk.AGICommand
 
 		#region ISupportCommandResponse Members
 
-		void ISupportCommandResponse.ProcessResponse(string response)
+		void ISupportCommandResponse.ProcessResponse(FastAGIResponse response)
 		{
-			_resultingValue = response;
+			_resultingValue = response.Payload;
 		}
 
 		#endregion
