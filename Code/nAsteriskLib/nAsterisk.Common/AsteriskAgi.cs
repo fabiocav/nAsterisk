@@ -368,6 +368,15 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
+		public Digits SayTime(DateTime time, Digits escapeDigits)
+		{
+			SayTimeCommand command = new SayTimeCommand(time, escapeDigits);
+
+			processCommand(command);
+
+			return command.GetResult();
+		}
+
 		public void EnableMusic(bool enabled)
 		{
 			EnableMusicCommand command = new EnableMusicCommand(enabled);
