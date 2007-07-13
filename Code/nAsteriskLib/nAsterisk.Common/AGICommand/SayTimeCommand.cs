@@ -30,7 +30,7 @@ namespace nAsterisk.AGICommand
 
 		public override string GetCommand()
 		{
-			return string.Format("SAY TIME {0} {1}", (_time.ToUniversalTime().Ticks / TimeSpan.TicksPerSecond), AsteriskAgi.GetDigitsString(_escapeDigits));
+			return string.Format("SAY TIME {0} {1}", ((_time - new DateTime(1970,1,1,0,0,0)).TotalSeconds), AsteriskAgi.GetDigitsString(_escapeDigits));
 		}
 
 		public override bool IsSuccessfulResult(string result)
