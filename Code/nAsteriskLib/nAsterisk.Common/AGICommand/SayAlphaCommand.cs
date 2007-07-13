@@ -7,8 +7,8 @@ namespace nAsterisk.AGICommand
 	public class SayAlphaCommand : BaseAGICommand, IProvideCommandResult
 	{
 		private string _chars;
-		private string _pressedDigit;
 
+		private Digits _pressedDigit;
 		private Digits _escapeDigits;
 
 		public SayAlphaCommand(string chars, Digits escapeDigits)
@@ -40,12 +40,12 @@ namespace nAsterisk.AGICommand
 			int.TryParse(result, out code);
 
 			if (code > 0)
-				_pressedDigit = ((Char)code).ToString();
+				_pressedDigit = AsteriskAgi.GetDigitsFromString(((Char)code).ToString());
 
 			return (code != -1);
 		}
 
-		public string GetResult()
+		public Digits GetResult()
 		{
 			return _pressedDigit;
 		}

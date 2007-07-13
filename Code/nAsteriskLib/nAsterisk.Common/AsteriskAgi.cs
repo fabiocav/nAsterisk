@@ -472,6 +472,32 @@ namespace nAsterisk
 			return sb.ToString();
 		}
 
+		public static Digits GetDigitsFromString(string digitsString)
+		{
+			Digits digits = Digits.None;
+
+			foreach (Char c in digitsString)
+			{
+				switch (c)
+				{
+					case '0': digits |= Digits.Zero; break;
+					case '1': digits |= Digits.One; break;
+					case '2': digits |= Digits.Two; break;
+					case '3': digits |= Digits.Three; break;
+					case '4': digits |= Digits.Four; break;
+					case '5': digits |= Digits.Five; break;
+					case '6': digits |= Digits.Six; break;
+					case '7': digits |= Digits.Seven; break;
+					case '8': digits |= Digits.Eight; break;
+					case '9': digits |= Digits.Nine; break;
+					case '*': digits |= Digits.Asterisk; break;
+					case '#': digits |= Digits.Pound; break;
+				}
+			}
+
+			return digits;
+		}
+
 		#endregion
 	}
 }
