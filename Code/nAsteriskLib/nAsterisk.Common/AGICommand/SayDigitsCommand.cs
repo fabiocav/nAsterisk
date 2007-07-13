@@ -10,6 +10,8 @@ namespace nAsterisk.AGICommand
 		private Digits _escapeDigits;
 		private Digits _pressedDigit;
 
+		private string _validChars = "0123456789#*";
+
 		public SayDigitsCommand(string number, Digits escapeDigits)
 		{
 			_number = number;
@@ -31,7 +33,18 @@ namespace nAsterisk.AGICommand
 
 		public override string GetCommand()
 		{
+			validateNumber(_number);
+
 			return string.Format("SAY DIGITS {0} {1}", _number, AsteriskAgi.GetDigitsString(_escapeDigits));
+		}
+
+		private void validateNumber(string _number)
+		{
+			foreach (char c in _number)
+			{
+				if (!_validChars.Contains(c.ToString()))
+					throw new ArgumentException("The Number contains invalid digits.");
+			}
 		}
 
 		public override bool IsSuccessfulResult(string result)
