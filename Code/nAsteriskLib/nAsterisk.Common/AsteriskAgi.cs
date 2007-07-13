@@ -397,6 +397,12 @@ namespace nAsterisk
 			processCommand(command);
 		}
 
+		public void SetExtension(string extension)
+		{
+			SetExtensionCommand command = new SetExtensionCommand(extension);
+			processCommand(command);
+		}
+
 		public void SetPriority(int priority)
 		{
 			SetPriorityCommand command = new SetPriorityCommand(priority);
