@@ -377,6 +377,13 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
+		public void SendText(string text)
+		{
+			SendTextCommand command = new SendTextCommand(text);
+
+			processCommand(command);
+		}
+
 		public void EnableMusic(bool enabled)
 		{
 			EnableMusicCommand command = new EnableMusicCommand(enabled);
