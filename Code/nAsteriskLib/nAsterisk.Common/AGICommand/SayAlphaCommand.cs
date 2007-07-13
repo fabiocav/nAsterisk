@@ -9,9 +9,9 @@ namespace nAsterisk.AGICommand
 		private string _chars;
 		private string _pressedDigit;
 
-		private EscapeDigits _escapeDigits;
+		private Digits _escapeDigits;
 
-		public SayAlphaCommand(string chars, EscapeDigits escapeDigits)
+		public SayAlphaCommand(string chars, Digits escapeDigits)
 		{
 			_chars = chars;
 			_escapeDigits = escapeDigits;
@@ -23,7 +23,7 @@ namespace nAsterisk.AGICommand
 			set { _chars = value; }
 		}
 
-		public EscapeDigits EscapeDigits
+		public Digits EscapeDigits
 		{
 			get { return _escapeDigits; }
 			set { _escapeDigits = value; }

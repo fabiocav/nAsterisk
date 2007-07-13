@@ -5,7 +5,7 @@ using System.Text;
 namespace nAsterisk.AGICommand
 {
 	[Flags]
-	public enum EscapeDigits
+	public enum Digits
 	{
 		None = 0,
 		Zero = 1,
