@@ -324,7 +324,7 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
-		public Digits SayDigits(Digits number, Digits escapeDigits)
+		public Digits SayDigits(string number, Digits escapeDigits)
 		{
 			SayDigitsCommand command = new SayDigitsCommand(number, escapeDigits);
 
@@ -510,6 +510,7 @@ namespace nAsterisk
 		{
 			StringBuilder sb = new StringBuilder();
 
+			if (digits == Digits.None) sb.Append("\"\"");
 			if ((digits & Digits.Zero) == Digits.Zero) sb.Append('0');
 			if ((digits & Digits.One) == Digits.One) sb.Append('1');
 			if ((digits & Digits.Two) == Digits.Two) sb.Append('2');

@@ -6,11 +6,11 @@ namespace nAsterisk.AGICommand
 {
 	public class SayDigitsCommand : BaseAGICommand, IProvideCommandResult
 	{
-		private Digits _number;
+		private string _number;
 		private Digits _escapeDigits;
 		private Digits _pressedDigit;
 
-		public SayDigitsCommand(Digits number, Digits escapeDigits)
+		public SayDigitsCommand(string number, Digits escapeDigits)
 		{
 			_number = number;
 			_escapeDigits = escapeDigits;
@@ -22,7 +22,7 @@ namespace nAsterisk.AGICommand
 			set { _escapeDigits = value; }
 		}
 
-		public Digits Number
+		public string Number
 		{
 			get { return _number; }
 			set { _number = value; }
@@ -31,7 +31,7 @@ namespace nAsterisk.AGICommand
 
 		public override string GetCommand()
 		{
-			return string.Format("SAY DIGITS {0} {1}", AsteriskAgi.GetDigitsString(_number), AsteriskAgi.GetDigitsString(_escapeDigits));
+			return string.Format("SAY DIGITS {0} {1}", _number, AsteriskAgi.GetDigitsString(_escapeDigits));
 		}
 
 		public override bool IsSuccessfulResult(string result)
