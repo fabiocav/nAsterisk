@@ -442,7 +442,7 @@ namespace nAsterisk
 		}
 
 		#region StreamFile overloads
-		public string StreamFile(string filename, string escapedigits, int offset)
+		public StreamFileResult StreamFile(string filename, string escapedigits, int offset)
 		{
 			StreamFileCommand command = new StreamFileCommand(filename, escapedigits, offset);
 			processCommand(command);
@@ -450,7 +450,7 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
-		public string StreamFile(string filename, string escapedigits)
+		public StreamFileResult StreamFile(string filename, string escapedigits)
 		{
 			StreamFileCommand command = new StreamFileCommand(filename, escapedigits);
 			processCommand(command);
@@ -458,7 +458,7 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
-		public string StreamFile(string filename, int offset)
+		public StreamFileResult StreamFile(string filename, int offset)
 		{
 			StreamFileCommand command = new StreamFileCommand(filename, offset);
 			processCommand(command);
@@ -466,7 +466,7 @@ namespace nAsterisk
 			return command.GetResult();
 		}
 
-		public string StreamFile(string filename)
+		public StreamFileResult StreamFile(string filename)
 		{
 			StreamFileCommand command = new StreamFileCommand(filename);
 			processCommand(command);

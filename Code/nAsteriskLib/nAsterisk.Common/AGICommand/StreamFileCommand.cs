@@ -4,12 +4,12 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class StreamFileCommand : BaseAGICommand, IProvideCommandResult
+	internal class StreamFileCommand : BaseAGICommand
 	{
 		private string _filename = "";
 		private string _escapedigits = "\"\"";
 		private int _offset = -1;
-		private string _digit = "";
+		private Digits _digit;
 
 		public StreamFileCommand(string filename, string escapedigits, int offset) : this(filename, offset)
 		{
@@ -49,7 +49,7 @@ namespace nAsterisk.AGICommand
 			set { _filename = value; }
 		}
 
-		public string Digit
+		public Digits Digit
 		{
 			get { return _digit; }
 		}
@@ -71,25 +71,38 @@ namespace nAsterisk.AGICommand
 				return false;
 			else
 			{
-				byte b = byte.Parse(result);
-				_digit = System.Text.ASCIIEncoding.ASCII.GetString(new byte[] { b });
+				char cdigit = (char)int.Parse(result);
+				_digit = AsteriskAgi.GetDigitsFromString(new string(cdigit, 1));
 
 				return true;
 			}
 		}
 
-		public string GetResult()
+		public StreamFileResult GetResult()
 		{
-			return _digit;
+			return new StreamFileResult(_digit, _offset);
+		}
+	}
+
+	public class StreamFileResult
+	{
+		private int _offset;
+		private Digits _digit;
+
+		public StreamFileResult(Digits digit, int offset)
+		{
+			_digit = digit;
+			_offset = offset;
 		}
 
-		#region IProviteCommandResult Members
-
-		object IProvideCommandResult.GetResult()
+		public Digits PressedDigit
 		{
-			return this.GetResult();
+			get { return _digit; }
 		}
-
-		#endregion
+	
+		public int EndingOffset
+		{
+			get { return _offset;}
+		}
 	}
 }
