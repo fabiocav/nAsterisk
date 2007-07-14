@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class DatabasePutCommand : AGICommandBase
+	public class DatabasePutCommand : AGINoReturnCommandBase
 	{
 		private string _family;
 		private string _key;

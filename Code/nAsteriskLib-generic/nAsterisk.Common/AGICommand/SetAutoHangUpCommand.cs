@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class SetAutoHangUpCommand : AGICommandBase
+	public class SetAutoHangUpCommand : AGINoReturnCommandBase
 	{
 		private int _time;
 

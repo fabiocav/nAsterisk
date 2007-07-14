@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class SetPriorityCommand : AGICommandBase
+	internal class SetPriorityCommand : AGINoReturnCommandBase
 	{
 		private int _priority;
 

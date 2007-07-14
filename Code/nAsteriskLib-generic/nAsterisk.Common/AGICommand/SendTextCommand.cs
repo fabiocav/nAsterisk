@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class SendTextCommand : AGICommandBase
+	public class SendTextCommand : AGINoReturnCommandBase
 	{
 		private string _text;
 

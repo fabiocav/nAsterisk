@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class GetVariableCommand : AGICommandBase, IProvideCommandResult
+	public class GetVariableCommand : AGIReturnCommandBase<string>
 	{
 		private string _variableName;
 		private string _variableValue;
@@ -30,24 +30,12 @@ namespace nAsterisk.AGICommand
 			return string.Format("GET VARIABLE {0}", _variableName);
 		}
 
-		public string GetResult()
-		{
-			return _variableValue;
-		}
-
-		public override void ProcessResponse(FastAGIResponse response)
+		public override string ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "1")
 				_variableValue = response.Payload;
+
+            return _variableName;
 		}
-
-		#region IProviteCommandResult Members
-
-		object IProvideCommandResult.GetResult()
-		{
-			return this.GetResult();
-		}
-
-		#endregion
 	}
 }

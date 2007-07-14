@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class AnswerCommand : AGICommandBase
+	public class AnswerCommand : AGINoReturnCommandBase
 	{
 		public override string GetCommand()
 		{

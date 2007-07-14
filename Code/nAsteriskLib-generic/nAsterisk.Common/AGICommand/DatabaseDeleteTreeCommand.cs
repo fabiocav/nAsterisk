@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class DatabaseDeleteTreeCommand : AGICommandBase
+	public class DatabaseDeleteTreeCommand : AGINoReturnCommandBase
 	{
 		private string _family;
 		private string _keyTree;

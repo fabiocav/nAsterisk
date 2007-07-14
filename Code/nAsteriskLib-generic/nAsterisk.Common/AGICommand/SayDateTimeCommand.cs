@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class SayDateTimeCommand : AGICommandBase, IProvideCommandResult
+	public class SayDateTimeCommand : AGIReturnCommandBase<Digits>
 	{
 		private string _format;
 		private string _timeZone;
@@ -129,7 +129,7 @@ namespace nAsterisk.AGICommand
 			return string.Format(commandFormat, (_time - (new DateTime(1970,1,1,0,0,0))).TotalSeconds, AsteriskAGI.GetDigitsString(_escapeDigits), _format, _timeZone);
 		}
 
-		public override void ProcessResponse(FastAGIResponse response)
+		public override Digits ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "-1")
 				throw new AsteriskException("SayDateTime Command Failed.");
@@ -137,20 +137,7 @@ namespace nAsterisk.AGICommand
 			if (response.ResultValue != "0")
 				_pressedDigit = AsteriskAGI.GetDigitsFromString(((Char)int.Parse(response.ResultValue)).ToString());
 
+            return _pressedDigit;
 		}
-
-		public Digits GetResult()
-		{
-			return _pressedDigit;
-		}
-
-		#region IProvideCommandResult Members
-
-		object IProvideCommandResult.GetResult()
-		{
-			return this.GetResult();
-		}
-
-		#endregion
 	}
 }

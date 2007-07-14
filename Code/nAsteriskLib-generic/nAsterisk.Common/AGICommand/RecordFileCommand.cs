@@ -5,7 +5,7 @@ using System.Text;
 namespace nAsterisk.AGICommand
 {
 
-	public class RecordFileCommand : AGICommandBase, IProvideCommandResult
+	public class RecordFileCommand : AGIReturnCommandBase<Char?>
 	{
 		private string _fileName;
 		private string _format;
@@ -116,7 +116,7 @@ namespace nAsterisk.AGICommand
 			return true;
 		}
 
-		public override void ProcessResponse(FastAGIResponse response)
+		public override Char? ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "-1")
 			{
@@ -154,20 +154,8 @@ namespace nAsterisk.AGICommand
 			{
 				_dtmfDigit = (Char)int.Parse(response.ResultValue);
 			}
+
+            return _dtmfDigit;
 		}
-
-		public Char? GetResult()
-		{
-			return _dtmfDigit;
-		}
-
-		#region IProvideCommandResult Members
-
-		object IProvideCommandResult.GetResult()
-		{
-			return this.GetResult();
-		}
-
-		#endregion
 	}
 }

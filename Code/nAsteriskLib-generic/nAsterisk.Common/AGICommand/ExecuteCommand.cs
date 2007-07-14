@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class ExecuteCommand : AGICommandBase, IProvideCommandResult
+	public class ExecuteCommand : AGIReturnCommandBase<string>
 	{
 		private string _application;
 		private string _options;
@@ -33,26 +33,14 @@ namespace nAsterisk.AGICommand
 			return string.Format("EXEC {0} {1}", _application, _options);
 		}
 
-		public override void ProcessResponse(FastAGIResponse response)
+		public override string ProcessResponse(FastAGIResponse response)
 		{
 			_applicationReturnValue = response.ResultValue;
 
 			if (response.ResultValue == "-2")
 				throw new AsteriskException("Execute Command Failed.");
+
+            return _applicationReturnValue;
 		}
-
-		public string GetResult()
-		{
-			return _applicationReturnValue;
-		}
-
-		#region IProviteCommandResult Members
-
-		object IProvideCommandResult.GetResult()
-		{
-			return this.GetResult();
-		}
-
-		#endregion
 	}
 }

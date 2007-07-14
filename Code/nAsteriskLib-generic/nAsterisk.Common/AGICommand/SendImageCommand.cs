@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class SendImageCommand : AGICommandBase
+	internal class SendImageCommand : AGINoReturnCommandBase
 	{
 		private string _image;
 

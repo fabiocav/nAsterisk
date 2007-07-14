@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class HangUpCommand : AGICommandBase
+	public class HangUpCommand : AGINoReturnCommandBase
 	{
 		private string _channelName;
 

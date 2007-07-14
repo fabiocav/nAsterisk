@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class WaitForDigitCommand : AGICommandBase, IProvideCommandResult
+	internal class WaitForDigitCommand : AGIReturnCommandBase<Char?>
 	{
 		private TimeSpan _timeout;
 		private Char? _digit;
@@ -25,7 +25,7 @@ namespace nAsterisk.AGICommand
 			return string.Format("WAIT FOR DIGIT {0}", _timeout.TotalMilliseconds);
 		}
 
-		public override void ProcessResponse(FastAGIResponse response)
+		public override Char? ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "-1")
 				throw new AsteriskException("WaitForDigit Command Failed.");
@@ -38,20 +38,8 @@ namespace nAsterisk.AGICommand
 					_digit = (Char)digitCode;
 				}
 			}
+
+            return _digit;
 		}
-
-		public Char? GetResult()
-		{
-			return _digit;
-		}
-
-		#region IProviteCommandResult Members
-
-		object IProvideCommandResult.GetResult()
-		{
-			return this.GetResult();
-		}
-
-		#endregion
 	}
 }

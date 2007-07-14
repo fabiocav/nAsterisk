@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class TDDModeCommand : AGICommandBase
+	internal class TDDModeCommand : AGINoReturnCommandBase
 	{
 		private bool _enabled = false;
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class SetExtensionCommand : AGICommandBase
+	internal class SetExtensionCommand : AGINoReturnCommandBase
 	{
 		private string _extension;
 
