@@ -76,6 +76,7 @@
     <Compile Include="AGICommand\WaitForDigitCommand.cs" />
     <Compile Include="AGICommand\_enum.cs" />
     <Compile Include="AsteriskAGI.cs" />
+    <Compile Include="AsteriskCommandException.cs" />
     <Compile Include="AsteriskException.cs" />
     <Compile Include="Configuration\ITcpHostConfigurationSource.cs" />
     <Compile Include="Configuration\ProgramaticTcpHostConfigurationSource.cs" />
