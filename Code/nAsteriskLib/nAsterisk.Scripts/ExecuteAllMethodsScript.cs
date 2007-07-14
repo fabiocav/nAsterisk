@@ -11,9 +11,24 @@ namespace nAsterisk.Scripts
 
 		public void Execute(AsteriskAGI agi, Dictionary<string, string> vars)
 		{
-			agi.Answer();
-			Console.WriteLine("Called Answer");
+			try
+			{
+				agi.Answer();
+				Console.WriteLine("Called Answer");
 
+				this.RunScript(agi, vars);
+
+				agi.HangUp();
+				Console.WriteLine("Called Hangup");
+			}
+			catch (HangUpException)
+			{
+				Console.WriteLine("###Asterisk hung up...");
+			}
+		}
+
+		private void RunScript(AsteriskAGI agi, Dictionary<string, string> vars)
+		{
 			ChannelStatus status = agi.GetChannelStatus();
 			Console.WriteLine("Called GetChannelStatus: {0}", status);
 
@@ -65,8 +80,41 @@ namespace nAsterisk.Scripts
 			}
 
 
-			agi.StreamFile("vm-savedto");
+			StreamFileResult result = agi.StreamFile("hang-on-a-second-angry", "1234567890*#");
 			Console.WriteLine("Called StreamFile");
+
+
+			//Console.WriteLine("Please record your message now");
+			//agi.RecordFile("blahrec", "wav", Digits.AllNumbers | Digits.AllSymbols, -1);
+			//Console.WriteLine("Called RecordFile");
+
+
+			//agi.StreamFile("blahrec");
+
+
+			agi.SayNumber(30023, Digits.None);
+			Console.WriteLine("Called SayNumber");
+
+
+			agi.SayDigits("1234567890#*", Digits.None);
+			Console.WriteLine("Called SayDigits");
+
+
+			agi.SayAlpha("ABCDEF", Digits.None);
+			Console.WriteLine("Called SayAlpha");
+
+
+			agi.SayPhonetic("WT", Digits.None);
+			Console.WriteLine("Called SayPhonetic");
+
+
+			agi.SetAutoHangUp(10);
+			Console.WriteLine("Called SetAutoHangup");
+
+
+			agi.SayDateTime(DateTime.Now, Digits.None, "\"ABdY 'digits/at' IMp\"", "UTC");
+			agi.SayDateTime(DateTime.Now, Digits.None);
+			Console.WriteLine("Called SayDateTime");
 
 
 			agi.SetVariable("foo", "bar");
@@ -77,8 +125,16 @@ namespace nAsterisk.Scripts
 			Console.WriteLine("Called GetVariable: {0}", var);
 
 
-			agi.HangUp();
-			Console.WriteLine("Called Hangup");
+			agi.EnableMusic(true);
+			Console.WriteLine("Called EnableMusic(true), pausing for 2 seconds");
+			System.Threading.Thread.Sleep(5000);
+			agi.EnableMusic(false);
+			Console.WriteLine("Called EnableMusic(false)");
+			System.Threading.Thread.Sleep(2000);
+
+
+			//agi.SetExtension("856");
+			//Console.WriteLine("Called SetExtension");
 		}
 
 		#endregion
