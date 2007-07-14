@@ -85,6 +85,7 @@
     <Compile Include="IAsteriskAGIScript.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AGICommand\SayAlphaCommand.cs" />
+    <Compile Include="SourceCodeMD5Attribute.cs" />
     <Compile Include="TcpAGIScriptHost.cs" />
     <Compile Include="_enum.cs" />
   </ItemGroup>
