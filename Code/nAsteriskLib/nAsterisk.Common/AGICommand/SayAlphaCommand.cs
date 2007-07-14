@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class SayAlphaCommand : AGICommandBase, IProvideCommandResult
+	public class SayAlphaCommand : AGIReturnCommandBase<Digits>
 	{
 		private string _chars;
 
@@ -34,27 +34,15 @@ namespace nAsterisk.AGICommand
 			return string.Format("SAY ALPHA \"{0}\" \"{1}\"", _chars, AsteriskAGI.GetDigitsString(_escapeDigits));
 		}
 
-		public override void ProcessResponse(FastAGIResponse response)
+		public override Digits ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "-1")
-				throw new AsteriskException("SayAlpha Command Failed.");
+				throw new AsteriskCommandException("SayAlpha Command Failed.");
 
 			if (response.ResultValue != "0")
 				_pressedDigit = AsteriskAGI.GetDigitsFromString(((Char)int.Parse(response.ResultValue)).ToString());
+
+            return _pressedDigit;
 		}
-
-		public Digits GetResult()
-		{
-			return _pressedDigit;
-		}
-
-		#region IProvideCommandResult Members
-
-		object IProvideCommandResult.GetResult()
-		{
-			return this.GetResult();
-		}
-
-		#endregion
 	}
 }

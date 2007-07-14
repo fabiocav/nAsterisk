@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class NoopCommand : AGICommandBase
+	public class NoopCommand : AGINoReturnCommandBase
 	{
 		public NoopCommand()
 		{}

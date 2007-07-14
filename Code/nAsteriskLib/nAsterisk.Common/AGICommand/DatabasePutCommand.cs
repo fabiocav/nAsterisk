@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class DatabasePutCommand : AGICommandBase
+	public class DatabasePutCommand : AGINoReturnCommandBase
 	{
 		private string _family;
 		private string _key;
@@ -48,7 +48,7 @@ namespace nAsterisk.AGICommand
 		public override void ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "0")
-				throw new AsteriskException("DatabasePut Command Failed.");
+				throw new AsteriskCommandException("DatabasePut Command Failed.");
 		}
 	}
 }

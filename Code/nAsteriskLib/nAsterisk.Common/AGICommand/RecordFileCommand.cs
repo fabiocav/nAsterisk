@@ -5,7 +5,7 @@ using System.Text;
 namespace nAsterisk.AGICommand
 {
 
-	public class RecordFileCommand : AGICommandBase, IProvideCommandResult
+	public class RecordFileCommand : AGIReturnCommandBase<Char?>
 	{
 		private string _fileName;
 		private string _format;
@@ -116,7 +116,7 @@ namespace nAsterisk.AGICommand
 			return true;
 		}
 
-		public override void ProcessResponse(FastAGIResponse response)
+		public override Char? ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "-1")
 			{
@@ -124,12 +124,12 @@ namespace nAsterisk.AGICommand
 
 				if (response.Payload == "waitfor")
 				{
-					throw new AsteriskException(string.Format("{0} Waitfor. EndPos={1}", CommonExceptionMessage, response.EndPosition));
+					throw new AsteriskCommandException(string.Format("{0} Waitfor. EndPos={1}", CommonExceptionMessage, response.EndPosition));
 				}
 
 				if (response.Payload == "writefile")
 				{
-					throw new AsteriskException(string.Format("{0} Failure to write file.", CommonExceptionMessage));
+					throw new AsteriskCommandException(string.Format("{0} Failure to write file.", CommonExceptionMessage));
 				}
 			}
 			else if (response.ResultValue == "0")
@@ -141,12 +141,12 @@ namespace nAsterisk.AGICommand
 
 				if (response.Payload == "timeout")
 				{
-					throw new AsteriskException(string.Format("{0} Timeout. EndPos={1}", CommonExceptionMessage, response.EndPosition));
+					throw new AsteriskCommandException(string.Format("{0} Timeout. EndPos={1}", CommonExceptionMessage, response.EndPosition));
 				}
 			}
 			else if (response.Payload == "randomerror")
 			{
-					throw new AsteriskException(string.Format("{0} Random Error. EndPos={1}, Error={2}", CommonExceptionMessage, response.EndPosition, 
+				throw new AsteriskCommandException(string.Format("{0} Random Error. EndPos={1}, Error={2}", CommonExceptionMessage, response.EndPosition, 
 						response.ResultValue));
 			}
 
@@ -154,20 +154,8 @@ namespace nAsterisk.AGICommand
 			{
 				_dtmfDigit = (Char)int.Parse(response.ResultValue);
 			}
+
+            return _dtmfDigit;
 		}
-
-		public Char? GetResult()
-		{
-			return _dtmfDigit;
-		}
-
-		#region IProvideCommandResult Members
-
-		object IProvideCommandResult.GetResult()
-		{
-			return this.GetResult();
-		}
-
-		#endregion
 	}
 }

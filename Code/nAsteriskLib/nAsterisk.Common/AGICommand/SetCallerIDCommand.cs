@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class SetCallerIDCommand : AGICommandBase
+	public class SetCallerIDCommand : AGINoReturnCommandBase
 	{
 		private string _number;
 

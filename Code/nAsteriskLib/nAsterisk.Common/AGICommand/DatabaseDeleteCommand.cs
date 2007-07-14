@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class DatabaseDeleteCommand : AGICommandBase
+	public class DatabaseDeleteCommand : AGINoReturnCommandBase
 	{
 		private string _family;
 		private string _key;
@@ -41,7 +41,7 @@ namespace nAsterisk.AGICommand
 		public override void ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "0")
-				throw new AsteriskException("DatabaseDelete Command Failed.");
+				throw new AsteriskCommandException("DatabaseDelete Command Failed.");
 		}
 	}
 }

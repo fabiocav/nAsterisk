@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class SetAutoHangUpCommand : AGICommandBase
+	public class SetAutoHangUpCommand : AGINoReturnCommandBase
 	{
 		private int _time;
 
@@ -27,7 +27,7 @@ namespace nAsterisk.AGICommand
 		public override void ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "-1")
-				throw new AsteriskException("SetAutoHangUp Command Failed.");
+				throw new AsteriskCommandException("SetAutoHangUp Command Failed.");
 		}
 	}
 }

@@ -37,6 +37,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AGICommand\AGINoReturnCommandBase.cs" />
+    <Compile Include="AGICommand\AGIReturnCommandBase.cs" />
     <Compile Include="AGICommand\AnswerCommand.cs" />
     <Compile Include="AGICommand\AGICommandBase.cs" />
     <Compile Include="AGICommand\DatabaseDeleteCommand.cs" />

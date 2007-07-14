@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class EnableMusicCommand : AGICommandBase
+	internal class EnableMusicCommand : AGINoReturnCommandBase
 	{
 		private bool _enabled;
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class ReceiveTextCommand : AGICommandBase, IProvideCommandResult
+	internal class ReceiveTextCommand : AGIReturnCommandBase<string>
 	{
 		private int _timeout;
 		private string _text;
@@ -31,26 +31,14 @@ namespace nAsterisk.AGICommand
 			return string.Format("RECEIVE TEXT {0}", _timeout);
 		}
 
-		public override void ProcessResponse(FastAGIResponse response)
+		public override string ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "-1")
-				throw new AsteriskException("ReceiveText Command Failed.");
+				throw new AsteriskCommandException("ReceiveText Command Failed.");
 
 			_text = response.ResultValue;
+
+            return _text;
 		}
-
-		public string GetResult()
-		{
-			return _text;
-		}
-
-		#region IProvideCommandResult Members
-
-		object IProvideCommandResult.GetResult()
-		{
-			return this.GetResult();
-		}
-
-		#endregion
 	}
 }

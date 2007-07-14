@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class TDDModeCommand : AGICommandBase
+	internal class TDDModeCommand : AGINoReturnCommandBase
 	{
 		private bool _enabled = false;
 
@@ -27,7 +27,7 @@ namespace nAsterisk.AGICommand
 		public override void ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "0")
-				throw new AsteriskException("TDDMode Command Failed. The channel is not TDD capable.");
+				throw new AsteriskCommandException("TDDMode Command Failed. The channel is not TDD capable.");
 		}
 
 	}

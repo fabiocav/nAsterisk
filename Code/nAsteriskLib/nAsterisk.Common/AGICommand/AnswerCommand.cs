@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class AnswerCommand : AGICommandBase
+	public class AnswerCommand : AGINoReturnCommandBase
 	{
 		public override string GetCommand()
 		{
@@ -14,7 +14,7 @@ namespace nAsterisk.AGICommand
 		public override void ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "-1")
-				throw new AsteriskException("Aswer Command Failed.");
+				throw new AsteriskCommandException("Aswer Command Failed.");
 		}
 	}
 }
