@@ -4,10 +4,10 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class WaitForDigitCommand : BaseAGICommand, IProvideCommandResult
+	internal class WaitForDigitCommand : AGICommandBase, IProvideCommandResult
 	{
 		private TimeSpan _timeout;
-		private string _digit = "";
+		private Char? _digit;
 
 		public WaitForDigitCommand(TimeSpan timeout)
 		{
@@ -25,22 +25,22 @@ namespace nAsterisk.AGICommand
 			return string.Format("WAIT FOR DIGIT {0}", _timeout.TotalMilliseconds);
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			if (result == "0")
-				return true;
-			else if (result == "-1")
-				return false;
-			else
-			{
-				byte b = byte.Parse(result);
-				_digit = System.Text.ASCIIEncoding.ASCII.GetString(new byte[] { b });
+			if (response.ResultValue == "-1")
+				throw new AsteriskException("WaitForDigit Command Failed.");
 
-				return true;
+			if (response.ResultValue != "0")
+			{
+				int digitCode;
+				if (int.TryParse(response.ResultValue, out digitCode))
+				{
+					_digit = (Char)digitCode;
+				}
 			}
 		}
 
-		public string GetResult()
+		public Char? GetResult()
 		{
 			return _digit;
 		}

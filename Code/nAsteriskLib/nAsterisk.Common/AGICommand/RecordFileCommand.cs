@@ -5,7 +5,7 @@ using System.Text;
 namespace nAsterisk.AGICommand
 {
 
-	public class RecordFileCommand : BaseAGICommand, ISupportCommandResponse, IProvideCommandResult
+	public class RecordFileCommand : AGICommandBase, IProvideCommandResult
 	{
 		private string _fileName;
 		private string _format;
@@ -15,8 +15,10 @@ namespace nAsterisk.AGICommand
 		private int? _silence;
 		private bool _beep;
 
-		private string _dtmfDigits;
+		private Char? _dtmfDigit;
 		private string _validChars = "0123456789#*";
+
+		private const string CommonExceptionMessage = "RecordFile Command Failed.";
 
 		public RecordFileCommand(string fileName, string format, Digits escapeDigits, int timeout)
 			: this(fileName, format, escapeDigits, timeout, null, false, null) { }
@@ -103,11 +105,6 @@ namespace nAsterisk.AGICommand
 				_timeout, offsetSampleString, beepString, silenceString);
 		}
 
-		public override bool IsSuccessfulResult(string result)
-		{
-			return result != "-1";
-		}
-
 		private bool isValidDtmfString(string _number)
 		{
 			foreach (char c in _number)
@@ -119,46 +116,49 @@ namespace nAsterisk.AGICommand
 			return true;
 		}
 
-		#region ISupportCommandResponse Members
-
-		public void ProcessResponse(FastAGIResponse response)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			if (response.Payload == "randomerror")
+			if (response.ResultValue == "-1")
 			{
-				throw new AsteriskException(string.Format("Random Error. EndPos={0}, Error={1}", response.EndPosition, response.ResultValue));
+				
+
+				if (response.Payload == "waitfor")
+				{
+					throw new AsteriskException(string.Format("{0} Waitfor. EndPos={1}", CommonExceptionMessage, response.EndPosition));
+				}
+
+				if (response.Payload == "writefile")
+				{
+					throw new AsteriskException(string.Format("{0} Failure to write file.", CommonExceptionMessage));
+				}
 			}
-			
-			if (response.Payload == "timeout")
+			else if (response.ResultValue == "0")
 			{
-				throw new AsteriskException(string.Format("Timeout. EndPos={0}", response.EndPosition));
+				if (response.Payload == "hangup")
+				{
+					throw new HangUpException(string.Format("{0} EndPos={1}", CommonExceptionMessage, response.EndPosition));
+				}
+
+				if (response.Payload == "timeout")
+				{
+					throw new AsteriskException(string.Format("{0} Timeout. EndPos={1}", CommonExceptionMessage, response.EndPosition));
+				}
 			}
-			
-			if (response.Payload == "hangup")
+			else if (response.Payload == "randomerror")
 			{
-				throw new HangUpException(string.Format("EndPos={0}", response.EndPosition));
-			}
-			
-			if (response.Payload == "waitfor")
-			{
-				throw new AsteriskException(string.Format("Waitfor. EndPos={0}", response.EndPosition));
-			}
-			
-			if (response.Payload == "writefile")
-			{
-				throw new AsteriskException(string.Format("Failure to write file."));
+					throw new AsteriskException(string.Format("{0} Random Error. EndPos={1}, Error={2}", CommonExceptionMessage, response.EndPosition, 
+						response.ResultValue));
 			}
 
 			if (response.Payload == "dtmf")
 			{
-				_dtmfDigits = response.ResultValue;
+				_dtmfDigit = (Char)int.Parse(response.ResultValue);
 			}
 		}
 
-		#endregion
-
-		public string GetResult()
+		public Char? GetResult()
 		{
-			return _dtmfDigits;
+			return _dtmfDigit;
 		}
 
 		#region IProvideCommandResult Members

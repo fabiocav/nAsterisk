@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class SetVariableCommand : BaseAGICommand
+	internal class SetVariableCommand : AGICommandBase
 	{
 		private string _name;
 		private string _value;
@@ -32,9 +32,9 @@ namespace nAsterisk.AGICommand
 			return string.Format("SET VARIABLE {0} \"{1}\"", _name, _value);
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			return result == "1";
+			//This command always returns a result value of 1.
 		}
 	}
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class ReceiveCharCommand : BaseAGICommand, IProvideCommandResult
+	public class ReceiveCharCommand : AGICommandBase, IProvideCommandResult
 	{
 		private int _timeout;
 		private Char? _character = null;
@@ -33,15 +33,13 @@ namespace nAsterisk.AGICommand
 			return command;
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			int code = -1;
-			int.TryParse(result, out code);
+			if (response.ResultValue == "-1")
+				throw new AsteriskException("ReceiveChar Command Failed.");
 
-			if (code > 0)
-				_character = (Char)code;
-
-			return code != -1;
+			if (response.ResultValue != "0")
+				_character = (Char)int.Parse(response.ResultValue);
 		}
 
 		public Char? GetResult()

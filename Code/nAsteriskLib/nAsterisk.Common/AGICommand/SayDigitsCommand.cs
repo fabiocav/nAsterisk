@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class SayDigitsCommand : BaseAGICommand, IProvideCommandResult
+	public class SayDigitsCommand : AGICommandBase, IProvideCommandResult
 	{
 		private string _number;
 		private Digits _escapeDigits;
@@ -47,15 +47,13 @@ namespace nAsterisk.AGICommand
 			}
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			int code = -1;
-			int.TryParse(result, out code);
+			if (response.ResultValue == "-1")
+				throw new AsteriskException("SayDigits Command Failed.");
 
-			if (code > 0)
-				_pressedDigit = AsteriskAGI.GetDigitsFromString(((Char)code).ToString());
-
-			return code != -1;
+			if (response.ResultValue != "0")
+				_pressedDigit = AsteriskAGI.GetDigitsFromString(((Char)int.Parse(response.ResultValue)).ToString());
 		}
 
 		public Digits GetResult()

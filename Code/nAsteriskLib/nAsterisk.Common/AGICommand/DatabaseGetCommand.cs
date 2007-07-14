@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class DatabaseGetCommand : BaseAGICommand, ISupportCommandResponse, IProvideCommandResult
+	public class DatabaseGetCommand : AGICommandBase, IProvideCommandResult
 	{
 		private string _family;
 		private string _key;
@@ -39,27 +39,18 @@ namespace nAsterisk.AGICommand
 			return string.Format("DATABASE GET {0} {1}", _family, _key);
 		}
 
-		public override bool IsSuccessfulResult(string result)
-		{
-			int code = 0;
-			int.TryParse(result, out code);
-
-			return code == 1;
-		}
-
 		public string GetResult()
 		{
 			return _resultingValue;
 		}
 
-		#region ISupportCommandResponse Members
-
-		void ISupportCommandResponse.ProcessResponse(FastAGIResponse response)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
+			if (response.ResultValue == "0")
+				throw new AsteriskException("DatabaseGet Command Failed.");
+
 			_resultingValue = response.Payload;
 		}
-
-		#endregion
 
 		#region IProviteCommandResult Members
 

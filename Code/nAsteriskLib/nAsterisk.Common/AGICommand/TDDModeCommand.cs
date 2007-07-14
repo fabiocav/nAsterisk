@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class TDDModeCommand : BaseAGICommand
+	internal class TDDModeCommand : AGICommandBase
 	{
 		private bool _enabled = false;
 
@@ -24,14 +24,11 @@ namespace nAsterisk.AGICommand
 			return string.Format("TDD MODE {0}", _enabled ? "on" : "off");
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			if (result == "1")
-				return true;
-			else if (result == "0")
-				throw new AsteriskException("The channel is not TDD capable.");
-			else
-				return false;
+			if (response.ResultValue == "0")
+				throw new AsteriskException("TDDMode Command Failed. The channel is not TDD capable.");
 		}
+
 	}
 }

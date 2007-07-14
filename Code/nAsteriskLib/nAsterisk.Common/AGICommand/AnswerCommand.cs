@@ -4,19 +4,17 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class AnswerCommand : BaseAGICommand
+	public class AnswerCommand : AGICommandBase
 	{
 		public override string GetCommand()
 		{
 			return "ANSWER";
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			int code = 1;
-			int.TryParse(result, out code);
-
-			return code == 0;
+			if (response.ResultValue == "-1")
+				throw new AsteriskException("Aswer Command Failed.");
 		}
 	}
 }

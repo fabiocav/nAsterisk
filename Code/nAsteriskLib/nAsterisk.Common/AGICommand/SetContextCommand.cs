@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class SetContextCommand : BaseAGICommand
+	internal class SetContextCommand : AGICommandBase
 	{
 		private string _context;
 
@@ -24,9 +24,9 @@ namespace nAsterisk.AGICommand
 			return string.Format("SET CONTEXT {0}", _context);
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			return result == "0";
+			//This command always return a result value of 0.
 		}
 	}
 }

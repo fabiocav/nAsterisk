@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class SetExtensionCommand : BaseAGICommand
+	internal class SetExtensionCommand : AGICommandBase
 	{
 		private string _extension;
 
@@ -24,9 +24,9 @@ namespace nAsterisk.AGICommand
 			return string.Format("SET EXTENSION {0}", _extension);
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			return result == "0";
+			//This command always returns a result value of 0.
 		}
 	}
 }

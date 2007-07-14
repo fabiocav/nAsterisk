@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class VerboseCommand : BaseAGICommand
+	internal class VerboseCommand : AGICommandBase
 	{
 		private string _message;
 		private AsteriskVerboseLevel _level;
@@ -32,9 +32,7 @@ namespace nAsterisk.AGICommand
 			return string.Format("VERBOSE \"{0}\" {1}", _message, (int)_level);
 		}
 
-		public override bool IsSuccessfulResult(string result)
-		{
-			return true;
-		}
+		public override void ProcessResponse(FastAGIResponse response)
+		{}
 	}
 }

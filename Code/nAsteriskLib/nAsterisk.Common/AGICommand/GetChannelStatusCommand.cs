@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class GetChannelStatusCommand : BaseAGICommand, IProvideCommandResult
+	public class GetChannelStatusCommand : AGICommandBase, IProvideCommandResult
 	{
 		private string _channelName;
 		private ChannelStatus _channelStatus;
@@ -32,14 +32,10 @@ namespace nAsterisk.AGICommand
 			return command;
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			int status = 0;
-			if (int.TryParse(result, out status))
-			{
-				_channelStatus = (ChannelStatus)status;
-			}
-			return true; 
+			if (Enum.IsDefined(typeof(ChannelStatus), response.ResultValue))
+				_channelStatus = (ChannelStatus)Enum.Parse(typeof(ChannelStatus), response.ResultValue);
 		}
 
 		public ChannelStatus GetResult()

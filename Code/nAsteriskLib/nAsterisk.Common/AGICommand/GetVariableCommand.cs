@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class GetVariableCommand : BaseAGICommand, ISupportCommandResponse, IProvideCommandResult
+	public class GetVariableCommand : AGICommandBase, IProvideCommandResult
 	{
 		private string _variableName;
 		private string _variableValue;
@@ -30,27 +30,16 @@ namespace nAsterisk.AGICommand
 			return string.Format("GET VARIABLE {0}", _variableName);
 		}
 
-		public override bool IsSuccessfulResult(string result)
-		{
-			int code = 0;
-			int.TryParse(result, out code);
-
-			return code == 1;
-		}
-
 		public string GetResult()
 		{
 			return _variableValue;
 		}
 
-		#region ISupportCommandResponse Members
-
-		void ISupportCommandResponse.ProcessResponse(FastAGIResponse response)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			_variableValue = response.Payload;
+			if (response.ResultValue == "1")
+				_variableValue = response.Payload;
 		}
-
-		#endregion
 
 		#region IProviteCommandResult Members
 

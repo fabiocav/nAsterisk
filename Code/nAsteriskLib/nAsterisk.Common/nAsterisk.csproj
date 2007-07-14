@@ -38,7 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AGICommand\AnswerCommand.cs" />
-    <Compile Include="AGICommand\BaseAGICommand.cs" />
+    <Compile Include="AGICommand\AGICommandBase.cs" />
     <Compile Include="AGICommand\DatabaseDeleteCommand.cs" />
     <Compile Include="AGICommand\DatabaseDeleteTreeCommand.cs" />
     <Compile Include="AGICommand\DatabaseGetCommand.cs" />
@@ -46,10 +46,10 @@
     <Compile Include="AGICommand\ExecuteCommand.cs" />
     <Compile Include="AGICommand\GetChannelStatusCommand.cs" />
     <Compile Include="AGICommand\GetDataCommand.cs" />
+    <Compile Include="AGICommand\GetDataCommandResponse.cs" />
     <Compile Include="AGICommand\GetVariableCommand.cs" />
     <Compile Include="AGICommand\HangUpCommand.cs" />
     <Compile Include="AGICommand\IProviteCommandResult.cs" />
-    <Compile Include="AGICommand\ISupportCommandResponse.cs" />
     <Compile Include="AGICommand\NoopCommand.cs" />
     <Compile Include="AGICommand\ReceiveCharCommand.cs" />
     <Compile Include="AGICommand\RecordFileCommand.cs" />

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class HangUpCommand : BaseAGICommand
+	public class HangUpCommand : AGICommandBase
 	{
 		private string _channelName;
 
@@ -32,12 +32,10 @@ namespace nAsterisk.AGICommand
 			return command;
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			int code = -1;
-			int.TryParse(result, out code);
-
-			return code == 1;
+			if (response.ResultValue == "-1")
+				throw new AsteriskException("HangUp Command Failed.");
 		}
 	}
 }

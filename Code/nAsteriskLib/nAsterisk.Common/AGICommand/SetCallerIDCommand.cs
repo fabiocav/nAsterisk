@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class SetCallerIDCommand : BaseAGICommand
+	public class SetCallerIDCommand : AGICommandBase
 	{
 		private string _number;
 
@@ -24,9 +24,9 @@ namespace nAsterisk.AGICommand
 			return string.Format("SET CALLERID {0}", _number);
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			return true; // NOTE: Not worth parsing it always returns "200 result=1"
+			//This command always returns a result value of 1.
 		}
 	}
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class SendImageCommand : BaseAGICommand
+	internal class SendImageCommand : AGICommandBase
 	{
 		private string _image;
 
@@ -24,9 +24,10 @@ namespace nAsterisk.AGICommand
 			return string.Format("SEND IMAGE {0}", _image);
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			return result == "0";
+			if (response.ResultValue == "-1")
+				throw new AsteriskException("SendImage Command Failed.");
 		}
 	}
 }

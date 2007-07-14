@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class SayDateTimeCommand : BaseAGICommand, IProvideCommandResult
+	public class SayDateTimeCommand : AGICommandBase, IProvideCommandResult
 	{
 		private string _format;
 		private string _timeZone;
@@ -126,18 +126,17 @@ namespace nAsterisk.AGICommand
 			else if (string.IsNullOrEmpty(_format) || string.IsNullOrEmpty(_timeZone))
 				commandFormat = "SAY DATETIME {0} {1} {3}"; // TODO: This is going to need testing I'm not 100% sure asterisk will be able to tell if {3} is a timezone or a format.
 
-			return string.Format(commandFormat, (_time - (new DateTime(1970,1,1,0,0,0))).TotalSeconds, AsteriskAgi.GetDigitsString(_escapeDigits), _format, _timeZone);
+			return string.Format(commandFormat, (_time - (new DateTime(1970,1,1,0,0,0))).TotalSeconds, AsteriskAGI.GetDigitsString(_escapeDigits), _format, _timeZone);
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			int code = -1;
-			int.TryParse(result, out code);
+			if (response.ResultValue == "-1")
+				throw new AsteriskException("SayDateTime Command Failed.");
 
-			if (code > 0)
-				_pressedDigit = AsteriskAGI.GetDigitsFromString(((Char)code).ToString());
+			if (response.ResultValue != "0")
+				_pressedDigit = AsteriskAGI.GetDigitsFromString(((Char)int.Parse(response.ResultValue)).ToString());
 
-			return (code != -1);
 		}
 
 		public Digits GetResult()

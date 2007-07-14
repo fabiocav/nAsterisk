@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class NoopCommand : BaseAGICommand
+	public class NoopCommand : AGICommandBase
 	{
 		public NoopCommand()
 		{}
@@ -14,9 +14,9 @@ namespace nAsterisk.AGICommand
 			return "NOOP";
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			return true;
+			//This command always return a result value of 0.
 		}
 	}
 }

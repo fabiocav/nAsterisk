@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class SetPriorityCommand : BaseAGICommand
+	internal class SetPriorityCommand : AGICommandBase
 	{
 		private int _priority;
 
@@ -24,9 +24,10 @@ namespace nAsterisk.AGICommand
 			return string.Format("SET PRIORITY {0}", _priority);
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			return result == "0";
+			if (response.ResultValue != "0")
+				throw new AsteriskException("SetPriority Command Failed.");
 		}
 	}
 }

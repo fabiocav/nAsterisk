@@ -4,12 +4,12 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public class GetDataCommand: BaseAGICommand, IProvideCommandResult
+	public class GetDataCommand: AGICommandBase, IProvideCommandResult
 	{
 		private string _fileToStream;
 		private int _timeout;
 		private int _maxDigits;
-		private string _resultingDtmfData;
+		private GetDataCommandResult _result;
 
 		public GetDataCommand(string fileToStream)
 			: this(fileToStream, 0, 1024) { }
@@ -60,16 +60,20 @@ namespace nAsterisk.AGICommand
 			return command;
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			_resultingDtmfData = result;
+			if (response.ResultValue == "-1")
+				throw new AsteriskException("GetData Command Failed.");
 
-			return true;
+			_result = new GetDataCommandResult();
+
+			_result.ResultingDtmfData = response.ResultValue;
+			_result.Timeout = response.Payload == "timeout";
 		}
 
-		public string GetResult()
+		public GetDataCommandResult GetResult()
 		{
-			return _resultingDtmfData;
+			return _result;
 		}
 
 		#region IProviteCommandResult Members

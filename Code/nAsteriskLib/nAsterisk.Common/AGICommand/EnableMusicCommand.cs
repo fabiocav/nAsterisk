@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class EnableMusicCommand : BaseAGICommand
+	internal class EnableMusicCommand : AGICommandBase
 	{
 		private bool _enabled;
 
@@ -24,9 +24,9 @@ namespace nAsterisk.AGICommand
 			return string.Format("SET MUSIC {0}", _enabled ? "on" : "off");
 		}
 
-		public override bool IsSuccessfulResult(string result)
+		public override void ProcessResponse(FastAGIResponse response)
 		{
-			return result == "0";
+			//This command always returns a result value of 0.
 		}
 	}
 }

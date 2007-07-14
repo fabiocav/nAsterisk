@@ -41,8 +41,9 @@ namespace nAsterisk.Scripts
 
 
 			Console.WriteLine("Waiting 2 seconds for digit");
-			string digit = agi.WaitForDigit(TimeSpan.FromSeconds(2));
-			Console.WriteLine("Called WaitForDigit: {0}", digit);
+			Char? digit = agi.WaitForDigit(TimeSpan.FromSeconds(2));
+
+			Console.WriteLine("Called WaitForDigit: {0}", digit != null ? digit.Value.ToString() : "");
 
 
 			agi.VerboseLog("Test Error Log", AsteriskVerboseLevel.Error);

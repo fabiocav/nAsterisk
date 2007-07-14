@@ -4,9 +4,9 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	public abstract class BaseAGICommand
+	public abstract class AGICommandBase
 	{
 		public abstract string GetCommand();
-		public abstract bool IsSuccessfulResult(string result);
+		public abstract void ProcessResponse(FastAGIResponse response);
 	}
 }
