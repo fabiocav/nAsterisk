@@ -13,6 +13,9 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\nAsterisk_Public.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>true</DelaySign>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,6 +94,11 @@
     <Compile Include="SourceCodeMD5Attribute.cs" />
     <Compile Include="TcpAGIScriptHost.cs" />
     <Compile Include="_enum.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\nAsterisk_Public.snk">
+      <Link>nAsterisk_Public.snk</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
