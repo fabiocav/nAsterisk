@@ -4,17 +4,17 @@ using System.Text;
 
 namespace nAsterisk.AGICommand
 {
-	internal class WaitForDigitCommand : AGIReturnCommandBase<Char?>
+	internal class WaitForDigitCommand : AGIReturnCommandBase<Digits>
 	{
-		private TimeSpan _timeout;
-		private Char? _digit;
+		private int _timeout;
+		private Digits _digit;
 
-		public WaitForDigitCommand(TimeSpan timeout)
+		public WaitForDigitCommand(int timeout)
 		{
 			_timeout = timeout;
 		}
 
-		public TimeSpan Timeout
+		public int Timeout
 		{
 			get { return _timeout; }
 			set { _timeout = value; }
@@ -22,10 +22,10 @@ namespace nAsterisk.AGICommand
 
 		public override string GetCommand()
 		{
-			return string.Format("WAIT FOR DIGIT {0}", _timeout.TotalMilliseconds);
+			return string.Format("WAIT FOR DIGIT {0}", _timeout);
 		}
 
-		public override Char? ProcessResponse(FastAGIResponse response)
+		public override Digits ProcessResponse(FastAGIResponse response)
 		{
 			if (response.ResultValue == "-1")
 				throw new AsteriskCommandException("WaitForDigit Command Failed.");
@@ -35,7 +35,7 @@ namespace nAsterisk.AGICommand
 				int digitCode;
 				if (int.TryParse(response.ResultValue, out digitCode))
 				{
-					_digit = (Char)digitCode;
+					_digit = AsteriskAGI.GetDigitsFromString(((Char)digitCode).ToString());
 				}
 			}
 
