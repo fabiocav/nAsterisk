@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CliAGIHost", "CliAgiHost\Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nAsterisk.Scripts", "nAsterisk.Scripts\nAsterisk.Scripts.csproj", "{86AEC336-FBD9-488B-A1F1-FC118C44A952}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6476CC43-B31F-4BC0-8E4E-632BF4AF4543}"
+	ProjectSection(SolutionItems) = preProject
+		COPYING.LIB = COPYING.LIB
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 4
@@ -16,7 +21,7 @@ Global
 		SccProjectUniqueName1 = nAsterisk.Common\\nAsterisk.csproj
 		SccProjectName1 = nAsterisk.Common
 		SccLocalPath1 = nAsterisk.Common
-		SccProjectUniqueName2 = CliAgiHost\\CliAgiHost.csproj
+		SccProjectUniqueName2 = CliAgiHost\\CliAGIHost.csproj
 		SccProjectName2 = CliAgiHost
 		SccLocalPath2 = CliAgiHost
 		SccProjectUniqueName3 = nAsterisk.Scripts\\nAsterisk.Scripts.csproj
