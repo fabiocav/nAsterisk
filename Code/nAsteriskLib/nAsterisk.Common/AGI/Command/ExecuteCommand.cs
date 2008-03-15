@@ -25,28 +25,47 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	public class ExecuteCommand : AGIReturnCommandBase<string>
 	{
-		static void Main(string[] args)
+		private string _application;
+		private string _options;
+		private string _applicationReturnValue;
+
+		public ExecuteCommand(string application, string options)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_application = application;
+			_options = options;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public string Options
+		{
+			get { return _options; }
+			set { _options = value; }
+		}
 
-			host.Stop();
+		public string Application
+		{
+			get { return _application; }
+			set { _application = value; }
+		}
+
+		public override string GetCommand()
+		{
+			return string.Format("EXEC {0} {1}", _application, _options);
+		}
+
+		public override string ProcessResponse(FastAGIResponse response)
+		{
+			_applicationReturnValue = response.ResultValue;
+
+			if (response.ResultValue == "-2")
+				throw new AGICommandException("Execute Command Failed.");
+
+            return _applicationReturnValue;
 		}
 	}
 }

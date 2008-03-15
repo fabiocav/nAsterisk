@@ -25,28 +25,34 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	internal class SendImageCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		private string _image;
+
+		public SendImageCommand(string image)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_image = image;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public string Image
+		{
+			get { return _image; }
+			set { _image = value; }
+		}
+	
+		public override string GetCommand()
+		{
+			return string.Format("SEND IMAGE {0}", _image);
+		}
 
-			host.Stop();
+		public override void ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue == "-1")
+				throw new AGICommandException("SendImage Command Failed.");
 		}
 	}
 }

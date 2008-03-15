@@ -25,28 +25,48 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	public class ReceiveCharCommand : AGIReturnCommandBase<Char?>
 	{
-		static void Main(string[] args)
+		private int _timeout;
+		private Char? _character = null;
+
+		public ReceiveCharCommand()
+		{}
+
+		public ReceiveCharCommand(int timeout)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_timeout = timeout;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public int Timeout
+		{
+			get { return _timeout; }
+			set { _timeout = value; }
+		}
 
-			host.Stop();
+		public override string GetCommand()
+		{
+			string command = "RECEIVE CHAR";
+
+			if (_timeout > 0)
+				command = string.Format("{0} {1}", command, _timeout);
+
+			return command;
+		}
+
+		public override Char? ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue == "-1")
+				throw new AGICommandException("ReceiveChar Command Failed.");
+
+			if (response.ResultValue != "0")
+				_character = (Char)int.Parse(response.ResultValue);
+
+            return _character;
 		}
 	}
 }

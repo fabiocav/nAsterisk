@@ -25,28 +25,39 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	internal class VerboseCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		private string _message;
+		private AsteriskVerboseLevel _level;
+
+		public VerboseCommand(string message, AsteriskVerboseLevel level)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
-
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
-
-			host.Stop();
+			_message = message;
+			_level = level;
 		}
+
+		public AsteriskVerboseLevel Level
+		{
+			get { return _level; }
+			set { _level = value; }
+		}
+	
+		public string Message
+		{
+			get { return _message; }
+			set { _message = value; }
+		}
+	
+		public override string GetCommand()
+		{
+			return string.Format("VERBOSE \"{0}\" {1}", _message, (int)_level);
+		}
+
+		public override void ProcessResponse(FastAGIResponse response)
+		{}
 	}
 }

@@ -25,28 +25,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	public class AnswerCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		public override string GetCommand()
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			return "ANSWER";
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
-
-			host.Stop();
+		public override void ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue == "-1")
+				throw new AGICommandException("Aswer Command Failed.");
 		}
 	}
 }

@@ -25,28 +25,34 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	internal class SetPriorityCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		private int _priority;
+
+		public SetPriorityCommand(int priority)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_priority = priority;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public int Priority
+		{
+			get { return _priority; }
+			set { _priority = value; }
+		}
 
-			host.Stop();
+		public override string GetCommand()
+		{
+			return string.Format("SET PRIORITY {0}", _priority);
+		}
+
+		public override void ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue != "0")
+				throw new AGICommandException("SetPriority Command Failed.");
 		}
 	}
 }

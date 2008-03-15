@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{44082AD5-D04F-462F-9681-71C927CAA105}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -21,6 +21,21 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,65 +60,82 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AGICommand\AGINoReturnCommandBase.cs" />
-    <Compile Include="AGICommand\AGIReturnCommandBase.cs" />
-    <Compile Include="AGICommand\AnswerCommand.cs" />
-    <Compile Include="AGICommand\AGICommandBase.cs" />
-    <Compile Include="AGICommand\DatabaseDeleteCommand.cs" />
-    <Compile Include="AGICommand\DatabaseDeleteTreeCommand.cs" />
-    <Compile Include="AGICommand\DatabaseGetCommand.cs" />
-    <Compile Include="AGICommand\DatabasePutCommand.cs" />
-    <Compile Include="AGICommand\ExecuteCommand.cs" />
-    <Compile Include="AGICommand\GetChannelStatusCommand.cs" />
-    <Compile Include="AGICommand\GetDataCommand.cs" />
-    <Compile Include="AGICommand\GetDataCommandResponse.cs" />
-    <Compile Include="AGICommand\GetVariableCommand.cs" />
-    <Compile Include="AGICommand\HangUpCommand.cs" />
-    <Compile Include="AGICommand\IProviteCommandResult.cs" />
-    <Compile Include="AGICommand\NoopCommand.cs" />
-    <Compile Include="AGICommand\ReceiveCharCommand.cs" />
-    <Compile Include="AGICommand\RecordFileCommand.cs" />
-    <Compile Include="AGICommand\RecordingFormats.cs" />
-    <Compile Include="AGICommand\ReceiveTextCommand.cs" />
-    <Compile Include="AGICommand\SayDateCommand.cs" />
-    <Compile Include="AGICommand\SayDateTimeCommand.cs" />
-    <Compile Include="AGICommand\SayDigitsCommand.cs" />
-    <Compile Include="AGICommand\EnableMusicCommand.cs" />
-    <Compile Include="AGICommand\SayNumberCommand.cs" />
-    <Compile Include="AGICommand\SayPhoneticCommand.cs" />
-    <Compile Include="AGICommand\SayTimeCommand.cs" />
-    <Compile Include="AGICommand\SendImageCommand.cs" />
-    <Compile Include="AGICommand\SendTextCommand.cs" />
-    <Compile Include="AGICommand\SetAutoHangUpCommand.cs" />
-    <Compile Include="AGICommand\SetCallerIDCommand.cs" />
-    <Compile Include="AGICommand\SetContextCommand.cs" />
-    <Compile Include="AGICommand\SetExtensionCommand.cs" />
-    <Compile Include="AGICommand\SetPriorityCommand.cs" />
-    <Compile Include="AGICommand\SetVariableCommand.cs" />
-    <Compile Include="AGICommand\StreamFileCommand.cs" />
-    <Compile Include="AGICommand\TDDModeCommand.cs" />
-    <Compile Include="AGICommand\VerboseCommand.cs" />
-    <Compile Include="AGICommand\WaitForDigitCommand.cs" />
-    <Compile Include="AGICommand\_enum.cs" />
-    <Compile Include="AsteriskAGI.cs" />
-    <Compile Include="AsteriskCommandException.cs" />
+    <Compile Include="AGI\Command\AGINoReturnCommandBase.cs" />
+    <Compile Include="AGI\Command\AGIReturnCommandBase.cs" />
+    <Compile Include="AGI\Command\AnswerCommand.cs" />
+    <Compile Include="AGI\Command\AGICommandBase.cs" />
+    <Compile Include="AGI\Command\DatabaseDeleteCommand.cs" />
+    <Compile Include="AGI\Command\DatabaseDeleteTreeCommand.cs" />
+    <Compile Include="AGI\Command\DatabaseGetCommand.cs" />
+    <Compile Include="AGI\Command\DatabasePutCommand.cs" />
+    <Compile Include="AGI\Command\ExecuteCommand.cs" />
+    <Compile Include="AGI\Command\GetChannelStatusCommand.cs" />
+    <Compile Include="AGI\Command\GetDataCommand.cs" />
+    <Compile Include="AGI\Command\GetDataCommandResponse.cs" />
+    <Compile Include="AGI\Command\GetVariableCommand.cs" />
+    <Compile Include="AGI\Command\HangUpCommand.cs" />
+    <Compile Include="AGI\Command\IProviteCommandResult.cs" />
+    <Compile Include="AGI\Command\NoopCommand.cs" />
+    <Compile Include="AGI\Command\ReceiveCharCommand.cs" />
+    <Compile Include="AGI\Command\RecordFileCommand.cs" />
+    <Compile Include="AGI\Command\RecordingFormats.cs" />
+    <Compile Include="AGI\Command\ReceiveTextCommand.cs" />
+    <Compile Include="AGI\Command\SayDateCommand.cs" />
+    <Compile Include="AGI\Command\SayDateTimeCommand.cs" />
+    <Compile Include="AGI\Command\SayDigitsCommand.cs" />
+    <Compile Include="AGI\Command\EnableMusicCommand.cs" />
+    <Compile Include="AGI\Command\SayNumberCommand.cs" />
+    <Compile Include="AGI\Command\SayPhoneticCommand.cs" />
+    <Compile Include="AGI\Command\SayTimeCommand.cs" />
+    <Compile Include="AGI\Command\SendImageCommand.cs" />
+    <Compile Include="AGI\Command\SendTextCommand.cs" />
+    <Compile Include="AGI\Command\SetAutoHangUpCommand.cs" />
+    <Compile Include="AGI\Command\SetCallerIDCommand.cs" />
+    <Compile Include="AGI\Command\SetContextCommand.cs" />
+    <Compile Include="AGI\Command\SetExtensionCommand.cs" />
+    <Compile Include="AGI\Command\SetPriorityCommand.cs" />
+    <Compile Include="AGI\Command\SetVariableCommand.cs" />
+    <Compile Include="AGI\Command\StreamFileCommand.cs" />
+    <Compile Include="AGI\Command\TDDModeCommand.cs" />
+    <Compile Include="AGI\Command\VerboseCommand.cs" />
+    <Compile Include="AGI\Command\WaitForDigitCommand.cs" />
+    <Compile Include="AGI\Command\_enum.cs" />
+    <Compile Include="AGI\AsteriskAGI.cs" />
+    <Compile Include="AGI\AGICommandException.cs" />
     <Compile Include="AsteriskException.cs" />
     <Compile Include="Configuration\ITcpHostConfigurationSource.cs" />
     <Compile Include="Configuration\ProgramaticTcpHostConfigurationSource.cs" />
-    <Compile Include="FastAGIResponse.cs" />
+    <Compile Include="AGI\FastAGIResponse.cs" />
     <Compile Include="HangUpException.cs" />
-    <Compile Include="IAGIScriptHost.cs" />
-    <Compile Include="IAsteriskAGIScript.cs" />
+    <Compile Include="AGI\IAGIScriptHost.cs" />
+    <Compile Include="AGI\IAsteriskAGIScript.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AGICommand\SayAlphaCommand.cs" />
+    <Compile Include="AGI\Command\SayAlphaCommand.cs" />
     <Compile Include="SourceCodeMD5Attribute.cs" />
-    <Compile Include="TcpAGIScriptHost.cs" />
+    <Compile Include="AGI\TcpAGIScriptHost.cs" />
     <Compile Include="_enum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\nAsterisk_Public.snk">
       <Link>nAsterisk_Public.snk</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

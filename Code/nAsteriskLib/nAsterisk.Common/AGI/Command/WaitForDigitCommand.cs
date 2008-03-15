@@ -25,28 +25,46 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	internal class WaitForDigitCommand : AGIReturnCommandBase<Digits>
 	{
-		static void Main(string[] args)
+		private int _timeout;
+		private Digits _digit;
+
+		public WaitForDigitCommand(int timeout)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_timeout = timeout;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public int Timeout
+		{
+			get { return _timeout; }
+			set { _timeout = value; }
+		}
 
-			host.Stop();
+		public override string GetCommand()
+		{
+			return string.Format("WAIT FOR DIGIT {0}", _timeout);
+		}
+
+		public override Digits ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue == "-1")
+				throw new AGICommandException("WaitForDigit Command Failed.");
+
+			if (response.ResultValue != "0")
+			{
+				int digitCode;
+				if (int.TryParse(response.ResultValue, out digitCode))
+				{
+					_digit = AsteriskAGI.GetDigitsFromString(((Char)digitCode).ToString());
+				}
+			}
+
+            return _digit;
 		}
 	}
 }

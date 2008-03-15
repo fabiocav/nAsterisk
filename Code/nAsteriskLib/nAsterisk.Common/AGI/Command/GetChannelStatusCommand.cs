@@ -25,28 +25,44 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	public class GetChannelStatusCommand : AGIReturnCommandBase<ChannelStatus>
 	{
-		static void Main(string[] args)
+		private string _channelName;
+		private ChannelStatus _channelStatus;
+
+		public GetChannelStatusCommand()
+			: this(string.Empty) { }
+
+		public GetChannelStatusCommand(string channelName)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_channelName = channelName;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
+		public string ChannelName
+		{
+			get { return _channelName; }
+			set { _channelName = value; }
+		}
+
+		public override string GetCommand()
+		{
+			string command = "CHANNEL STATUS";
+			if (!string.IsNullOrEmpty(_channelName))
+				command = string.Format("{0} {1}", command, _channelName);
 			
-			Console.ReadLine();
+			return command;
+		}
 
-			host.Stop();
+		public override ChannelStatus ProcessResponse(FastAGIResponse response)
+		{
+			if (Enum.IsDefined(typeof(ChannelStatus), response.ResultValue))
+				_channelStatus = (ChannelStatus)Enum.Parse(typeof(ChannelStatus), response.ResultValue);
+
+            return _channelStatus;
 		}
 	}
 }

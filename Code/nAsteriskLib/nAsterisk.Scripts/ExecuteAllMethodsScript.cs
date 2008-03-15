@@ -26,7 +26,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using nAsterisk.AGICommand;
+using nAsterisk.AGI.Command;
+
+using nAsterisk.AGI;
 
 namespace nAsterisk.Scripts
 {

@@ -25,28 +25,55 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	public class DatabasePutCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		private string _family;
+		private string _key;
+		private string _value;
+
+		public DatabasePutCommand(string family, string keyTree, string value)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_family = family;
+			_key = keyTree;
+			_value = value;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public string Key
+		{
+			get { return _key; }
+			set { _key = value; }
+		}
 
-			host.Stop();
+		public string Family
+		{
+			get { return _family; }
+			set { _family = value; }
+		}
+
+		public string Value
+		{
+			get { return _value; }
+			set { _value = value; }
+		}
+
+		public override string GetCommand()
+		{
+			if (string.IsNullOrEmpty(_family) || string.IsNullOrEmpty(_key) || string.IsNullOrEmpty(_value))
+			{
+				throw new InvalidOperationException("The DatabasePutCommand requires Family, Key and Value to be set.");
+			}
+
+			return string.Format("DATABASE PUT {0} {1} {2}", _family, _key, _value);
+		}
+
+		public override void ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue == "0")
+				throw new AGICommandException("DatabasePut Command Failed.");
 		}
 	}
 }

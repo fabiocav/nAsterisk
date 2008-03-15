@@ -25,28 +25,45 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	internal class ReceiveTextCommand : AGIReturnCommandBase<string>
 	{
-		static void Main(string[] args)
+		private int _timeout;
+		private string _text;
+
+		public ReceiveTextCommand(int timeout)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_timeout = timeout;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public string Text
+		{
+			get { return _text; }
+			set { _text = value; }
+		}
+	
+		public int Timeout
+		{
+			get { return _timeout; }
+			set { _timeout = value; }
+		}
+	
+		public override string GetCommand()
+		{
+			return string.Format("RECEIVE TEXT {0}", _timeout);
+		}
 
-			host.Stop();
+		public override string ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue == "-1")
+				throw new AGICommandException("ReceiveText Command Failed.");
+
+			_text = response.ResultValue;
+
+            return _text;
 		}
 	}
 }

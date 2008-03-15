@@ -25,28 +25,34 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	public class SetAutoHangUpCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		private int _time;
+
+		public SetAutoHangUpCommand(int time)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_time = time;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public int Time
+		{
+			get { return _time; }
+			set { _time = value; }
+		}
 
-			host.Stop();
+		public override string GetCommand()
+		{
+			return string.Format("SET AUTOHANGUP {0}", _time);
+		}
+
+		public override void ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue == "-1")
+				throw new AGICommandException("SetAutoHangUp Command Failed.");
 		}
 	}
 }

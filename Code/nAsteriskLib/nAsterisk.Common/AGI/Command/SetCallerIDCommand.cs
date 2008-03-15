@@ -25,28 +25,33 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	public class SetCallerIDCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		private string _number;
+
+		public SetCallerIDCommand(string number)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_number = number;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public string Number
+		{
+			get { return _number; }
+			set { _number = value; }
+		}
 
-			host.Stop();
+		public override string GetCommand()
+		{
+			return string.Format("SET CALLERID {0}", _number);
+		}
+
+		public override void ProcessResponse(FastAGIResponse response)
+		{
+			//This command always returns a result value of 1.
 		}
 	}
 }

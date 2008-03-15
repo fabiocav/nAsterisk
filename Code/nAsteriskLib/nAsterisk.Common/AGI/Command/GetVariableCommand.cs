@@ -25,28 +25,42 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	public class GetVariableCommand : AGIReturnCommandBase<string>
 	{
-		static void Main(string[] args)
+		private string _variableName;
+		private string _variableValue;
+
+		public GetVariableCommand(string variableName)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_variableName = variableName;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public string VariableName
+		{
+			get { return _variableName; }
+			set { _variableName = value; }
+		}
 
-			host.Stop();
+		public override string GetCommand()
+		{
+			if (string.IsNullOrEmpty(_variableName))
+			{
+				throw new InvalidOperationException("The GetVariableCommand requires VariableName to be set.");
+			}
+
+			return string.Format("GET VARIABLE {0}", _variableName);
+		}
+
+		public override string ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue == "1")
+				_variableValue = response.Payload;
+
+            return _variableName;
 		}
 	}
 }

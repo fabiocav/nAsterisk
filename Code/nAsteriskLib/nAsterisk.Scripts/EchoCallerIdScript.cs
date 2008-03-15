@@ -27,6 +27,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using nAsterisk.AGI;
+
 namespace nAsterisk.Scripts
 {
 	public class EchoCallerIdScript : IAsteriskAGIScript

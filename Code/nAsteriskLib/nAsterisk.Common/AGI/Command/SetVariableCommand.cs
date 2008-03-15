@@ -25,28 +25,41 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	internal class SetVariableCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		private string _name;
+		private string _value;
+	
+		public SetVariableCommand(string name, string value)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_name = name;
+			_value = value;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public string Value
+		{
+			get { return _value; }
+			set { _value = value; }
+		}
 
-			host.Stop();
+		public string Name
+		{
+			get { return _name; }
+			set { _name = value; }
+		}
+
+		public override string GetCommand()
+		{
+			return string.Format("SET VARIABLE {0} \"{1}\"", _name, _value);
+		}
+
+		public override void ProcessResponse(FastAGIResponse response)
+		{
+			//This command always returns a result value of 1.
 		}
 	}
 }

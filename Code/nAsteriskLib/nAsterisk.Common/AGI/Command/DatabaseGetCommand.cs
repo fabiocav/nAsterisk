@@ -25,28 +25,53 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	public class DatabaseGetCommand : AGIReturnCommandBase<string>
 	{
-		static void Main(string[] args)
+		private string _family;
+		private string _key;
+		private string _resultingValue;
+
+		public DatabaseGetCommand(string family, string key)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_family = family;
+			_key = key;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public string Key
+		{
+			get { return _key; }
+			set { _key = value; }
+		}
 
-			host.Stop();
+		public string Family
+		{
+			get { return _family; }
+			set { _family = value; }
+		}
+
+
+		public override string GetCommand()
+		{
+			if (string.IsNullOrEmpty(_family) || string.IsNullOrEmpty(_key))
+			{
+				throw new InvalidOperationException("The DatabaseGetCommand requires Family AND Key to be set.");
+			}
+
+			return string.Format("DATABASE GET {0} {1}", _family, _key);
+		}
+
+		public override string ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue == "0")
+				throw new AGICommandException("DatabaseGet Command Failed.");
+
+			_resultingValue = response.Payload;
+
+            return _resultingValue;
 		}
 	}
 }

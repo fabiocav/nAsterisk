@@ -25,28 +25,35 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	internal class TDDModeCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		private bool _enabled = false;
+
+		public TDDModeCommand(bool enabled)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
-
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
-
-			host.Stop();
+			_enabled = enabled;
 		}
+
+		public bool Enabled
+		{
+			get { return _enabled; }
+			set { _enabled = value; }
+		}
+
+		public override string GetCommand()
+		{
+			return string.Format("TDD MODE {0}", _enabled ? "on" : "off");
+		}
+
+		public override void ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue == "0")
+				throw new AGICommandException("TDDMode Command Failed. The channel is not TDD capable.");
+		}
+
 	}
 }

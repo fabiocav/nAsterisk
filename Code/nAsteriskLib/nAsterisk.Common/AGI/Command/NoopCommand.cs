@@ -25,28 +25,23 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	public class NoopCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		public NoopCommand()
+		{}
+
+		public override string GetCommand()
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			return "NOOP";
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
-
-			host.Stop();
+		public override void ProcessResponse(FastAGIResponse response)
+		{
+			//This command always return a result value of 0.
 		}
 	}
 }

@@ -25,28 +25,55 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	public class DatabaseDeleteTreeCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		private string _family;
+		private string _keyTree;
+
+		public DatabaseDeleteTreeCommand(string family)
+			: this(family, null) { }
+
+		public DatabaseDeleteTreeCommand(string family, string keyTree)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_family = family;
+			_keyTree = keyTree;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
+		public string KeyTree
+		{
+			get { return _keyTree; }
+			set { _keyTree = value; }
+		}
+
+		public string Family
+		{
+			get { return _family; }
+			set { _family = value; }
+		}
+
+		public override string GetCommand()
+		{
+			if (string.IsNullOrEmpty(_family))
+			{
+				throw new InvalidOperationException("The DatabaseDeleteTreeCommand requires Family to be set.");
+			}
+
+			string command = string.Format("DATABASE DELTREE {0}", _family); 
+
+			if (!string.IsNullOrEmpty(_keyTree))
+				command = string.Format("{0} {1}", command, _keyTree);
 			
-			Console.ReadLine();
+			return command;
+		}
 
-			host.Stop();
+		public override void ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue == "0")
+				throw new AGICommandException("DatabaseDeleteTree Command Failed.");
 		}
 	}
 }

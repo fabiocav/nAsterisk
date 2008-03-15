@@ -25,28 +25,33 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	internal class SetExtensionCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		private string _extension;
+
+		public SetExtensionCommand(string extension)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_extension = extension;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public string Extension
+		{
+			get { return _extension; }
+			set { _extension = value; }
+		}
+	
+		public override string GetCommand()
+		{
+			return string.Format("SET EXTENSION {0}", _extension);
+		}
 
-			host.Stop();
+		public override void ProcessResponse(FastAGIResponse response)
+		{
+			//This command always returns a result value of 0.
 		}
 	}
 }

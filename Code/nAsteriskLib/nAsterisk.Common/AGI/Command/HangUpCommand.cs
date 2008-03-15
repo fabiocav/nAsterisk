@@ -25,28 +25,42 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-using nAsterisk.Configuration;
-using nAsterisk.Scripts;
-using nAsterisk.AGI;
-
-namespace CliAGIHost
+namespace nAsterisk.AGI.Command
 {
-	class Program
+	public class HangUpCommand : AGINoReturnCommandBase
 	{
-		static void Main(string[] args)
+		private string _channelName;
+
+		public HangUpCommand()
+		{}
+
+		public HangUpCommand(string channelName)
 		{
-			Dictionary<string, Type> mappings = new Dictionary<string, Type>();
-			mappings.Add("/blahblah", typeof(ExecuteAllMethodsScript));
+			_channelName = channelName;
+		}
 
-			ITcpHostConfigurationSource config = new ProgramaticTcpHostConfigurationSource(mappings);
-			TcpAGIScriptHost host = new TcpAGIScriptHost();
-			host.Configure(config);
-			host.Start();
-			
-			Console.ReadLine();
+		public string ChannelName
+		{
+			get { return _channelName; }
+			set { _channelName = value; }
+		}
 
-			host.Stop();
+		public override string GetCommand()
+		{
+			string command = "HANGUP";
+
+			if (!string.IsNullOrEmpty(_channelName))
+				command = string.Format("{0} {1}", command, _channelName);
+
+			return command;
+		}
+
+		public override void ProcessResponse(FastAGIResponse response)
+		{
+			if (response.ResultValue == "-1")
+				throw new AGICommandException("HangUp Command Failed.");
 		}
 	}
 }
