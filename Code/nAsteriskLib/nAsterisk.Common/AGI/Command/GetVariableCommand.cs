@@ -60,7 +60,7 @@ namespace nAsterisk.AGI.Command
 			if (response.ResultValue == "1")
 				_variableValue = response.Payload;
 
-            return _variableName;
+            return _variableValue;
 		}
 	}
 }
