@@ -60,6 +60,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AGI\AGIRequestInfo.cs" />
+    <Compile Include="AGI\AGIRequestVariableAttribute.cs" />
     <Compile Include="AGI\Command\AGINoReturnCommandBase.cs" />
     <Compile Include="AGI\Command\AGIReturnCommandBase.cs" />
     <Compile Include="AGI\Command\AnswerCommand.cs" />
@@ -102,6 +104,9 @@
     <Compile Include="AGI\Command\_enum.cs" />
     <Compile Include="AGI\AsteriskAGI.cs" />
     <Compile Include="AGI\AGICommandException.cs" />
+    <Compile Include="AGI\IAGIChannel.cs" />
+    <Compile Include="AGI\IAsteriskAGI.cs" />
+    <Compile Include="AGI\StreamAGIChannel.cs" />
     <Compile Include="AsteriskException.cs" />
     <Compile Include="Configuration\ITcpHostConfigurationSource.cs" />
     <Compile Include="Configuration\ProgramaticTcpHostConfigurationSource.cs" />

@@ -35,13 +35,13 @@ namespace nAsterisk.Scripts
 	{
 		#region IAsteriskAGIScript Members
 
-		public void Execute(AsteriskAGI agi, Dictionary<string, string> vars)
+		public void Execute(IAsteriskAGI agi, Dictionary<string, string> vars)
 		{
-			agi.Answer();
+            //agi.Getchann();
 
-			ChannelStatus status = agi.GetChannelStatus();
+            //ChannelStatus status = agi.GetChannelStatus();
 
-			Console.WriteLine("Caller ID is {0}", agi.CallerId);
+            //Console.WriteLine("Caller ID is {0}", agi.RequestInfo.MyProperty);
 		}
 
 		#endregion

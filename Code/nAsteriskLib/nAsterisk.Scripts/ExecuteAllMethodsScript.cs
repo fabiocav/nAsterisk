@@ -36,7 +36,7 @@ namespace nAsterisk.Scripts
 	{
 		#region IAsteriskAGIScript Members
 
-		public void Execute(AsteriskAGI agi, Dictionary<string, string> vars)
+		public void Execute(IAsteriskAGI agi, Dictionary<string, string> vars)
 		{
 			try
 			{
@@ -54,7 +54,7 @@ namespace nAsterisk.Scripts
 			}
 		}
 
-		private void RunScript(AsteriskAGI agi, Dictionary<string, string> vars)
+		private void RunScript(IAsteriskAGI agi, Dictionary<string, string> vars)
 		{
 			ChannelStatus status = agi.GetChannelStatus();
 			Console.WriteLine("Called GetChannelStatus: {0}", status);
