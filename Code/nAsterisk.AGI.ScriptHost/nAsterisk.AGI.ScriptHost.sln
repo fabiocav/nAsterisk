@@ -1,0 +1,97 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nAsterisk.AGI.ScriptHost", "nAsterisk.AGI.ScriptHost\nAsterisk.AGI.ScriptHost.csproj", "{3F76F29E-40C6-4374-9686-46681B22F375}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nAsterisk.AGI.ScriptHost.Contract", "nAsterisk.AGI.ScriptHost.Contract\nAsterisk.AGI.ScriptHost.Contract.csproj", "{6FF847A6-2D41-461A-AF9B-81319C7D86E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nAsterisk.AGI.ScriptHost.RemoteScriptManagers", "nAsterisk.AGI.ScriptHost.RemoteScriptManager\nAsterisk.AGI.ScriptHost.RemoteScriptManagers.csproj", "{A8524054-69B7-45BF-B133-9E1E92C76F89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nAsterisk.AGI.ScriptHost.RemoteAdapters", "nAsterisk.AGI.ScriptHost.RemoteAdapters\nAsterisk.AGI.ScriptHost.RemoteAdapters.csproj", "{B140218C-BE01-442E-BEF1-B7EAA8D35224}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nAsterisk.AGI.ScriptHost.HostAdapters", "nAsterisk.AGI.ScriptHost.HostAdapters\nAsterisk.AGI.ScriptHost.HostAdapters.csproj", "{C26AB8E6-F111-4627-ABBA-C7C6F397582D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nAsterisk.AGI.ScriptHost.Common", "nAsterisk.AGI.ScriptHost.Common\nAsterisk.AGI.ScriptHost.Common.csproj", "{A0C25104-2A48-4911-A16B-7FC9371CC871}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nAsterisk.AGI.ScriptHost.ConsoleHost", "nAsterisk.AGI.ScriptHost.ConsoleHost\nAsterisk.AGI.ScriptHost.ConsoleHost.csproj", "{E44E9F4C-E40C-4EB0-B7AE-65C564A551F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestScripts", "TestScripts\TestScripts.csproj", "{6E284A52-194E-480B-B6C2-0F6C84FD8674}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B24EE6C9-CDD1-4823-B6C6-E6F4B4741F98}"
+	ProjectSection(SolutionItems) = preProject
+		temp.snk = temp.snk
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs04.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = nAsterisk.AGI.ScriptHost.Common\\nAsterisk.AGI.ScriptHost.Common.csproj
+		SccProjectName1 = nAsterisk.AGI.ScriptHost.Common
+		SccLocalPath1 = nAsterisk.AGI.ScriptHost.Common
+		SccProjectUniqueName2 = nAsterisk.AGI.ScriptHost.ConsoleHost\\nAsterisk.AGI.ScriptHost.ConsoleHost.csproj
+		SccProjectName2 = nAsterisk.AGI.ScriptHost.ConsoleHost
+		SccLocalPath2 = nAsterisk.AGI.ScriptHost.ConsoleHost
+		SccProjectUniqueName3 = nAsterisk.AGI.ScriptHost.Contract\\nAsterisk.AGI.ScriptHost.Contract.csproj
+		SccProjectName3 = nAsterisk.AGI.ScriptHost.Contract
+		SccLocalPath3 = nAsterisk.AGI.ScriptHost.Contract
+		SccProjectUniqueName4 = nAsterisk.AGI.ScriptHost.HostAdapters\\nAsterisk.AGI.ScriptHost.HostAdapters.csproj
+		SccProjectName4 = nAsterisk.AGI.ScriptHost.HostAdapters
+		SccLocalPath4 = nAsterisk.AGI.ScriptHost.HostAdapters
+		SccProjectUniqueName5 = nAsterisk.AGI.ScriptHost.RemoteAdapters\\nAsterisk.AGI.ScriptHost.RemoteAdapters.csproj
+		SccProjectName5 = nAsterisk.AGI.ScriptHost.RemoteAdapters
+		SccLocalPath5 = nAsterisk.AGI.ScriptHost.RemoteAdapters
+		SccProjectUniqueName6 = nAsterisk.AGI.ScriptHost.RemoteScriptManager\\nAsterisk.AGI.ScriptHost.RemoteScriptManagers.csproj
+		SccProjectName6 = nAsterisk.AGI.ScriptHost.RemoteScriptManager
+		SccLocalPath6 = nAsterisk.AGI.ScriptHost.RemoteScriptManager
+		SccProjectUniqueName7 = nAsterisk.AGI.ScriptHost\\nAsterisk.AGI.ScriptHost.csproj
+		SccProjectName7 = nAsterisk.AGI.ScriptHost
+		SccLocalPath7 = nAsterisk.AGI.ScriptHost
+		SccProjectUniqueName8 = TestScripts\\TestScripts.csproj
+		SccProjectName8 = TestScripts
+		SccLocalPath8 = TestScripts
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F76F29E-40C6-4374-9686-46681B22F375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F76F29E-40C6-4374-9686-46681B22F375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F76F29E-40C6-4374-9686-46681B22F375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F76F29E-40C6-4374-9686-46681B22F375}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FF847A6-2D41-461A-AF9B-81319C7D86E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FF847A6-2D41-461A-AF9B-81319C7D86E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FF847A6-2D41-461A-AF9B-81319C7D86E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FF847A6-2D41-461A-AF9B-81319C7D86E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8524054-69B7-45BF-B133-9E1E92C76F89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8524054-69B7-45BF-B133-9E1E92C76F89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8524054-69B7-45BF-B133-9E1E92C76F89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8524054-69B7-45BF-B133-9E1E92C76F89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B140218C-BE01-442E-BEF1-B7EAA8D35224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B140218C-BE01-442E-BEF1-B7EAA8D35224}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B140218C-BE01-442E-BEF1-B7EAA8D35224}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B140218C-BE01-442E-BEF1-B7EAA8D35224}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C26AB8E6-F111-4627-ABBA-C7C6F397582D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C26AB8E6-F111-4627-ABBA-C7C6F397582D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C26AB8E6-F111-4627-ABBA-C7C6F397582D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C26AB8E6-F111-4627-ABBA-C7C6F397582D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C25104-2A48-4911-A16B-7FC9371CC871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C25104-2A48-4911-A16B-7FC9371CC871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C25104-2A48-4911-A16B-7FC9371CC871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C25104-2A48-4911-A16B-7FC9371CC871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E44E9F4C-E40C-4EB0-B7AE-65C564A551F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E44E9F4C-E40C-4EB0-B7AE-65C564A551F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E44E9F4C-E40C-4EB0-B7AE-65C564A551F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E44E9F4C-E40C-4EB0-B7AE-65C564A551F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E284A52-194E-480B-B6C2-0F6C84FD8674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E284A52-194E-480B-B6C2-0F6C84FD8674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E284A52-194E-480B-B6C2-0F6C84FD8674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E284A52-194E-480B-B6C2-0F6C84FD8674}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

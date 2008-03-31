@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Sample configuration file using the nAsterisk Script Host configuration.-->
+<configuration>
+  <configSections>
+    <section name="nAsterisk.agiScriptHost" type="nAsterisk.AGI.ScriptHost.Configuration.AGIScriptHostSection, nAsterisk.AGI.ScriptHost"/>
+  </configSections>
+  <nAsterisk.agiScriptHost>
+    <scriptMappings>
+      <mapping name="/noanswer" scriptManagerName="nAsterisk.RemoteScriptManagers.GenericScriptManager" isolationMode="AppDomain" permissionSet="FullTrust">
+        <managerSettings>
+          <add name="AGIScriptType" value="TestScripts.Test, TestScripts"/>
+        </managerSettings>
+      </mapping>
+      <mapping name="/echocallerid" scriptManagerName="nAsterisk.RemoteScriptManagers.EchoCallerIDManager" isolationMode="AppDomain" permissionSet="Internet"></mapping>
+      <mapping name="/test" scriptManagerName="nAsterisk.RemoteScriptManagers.GenericScriptManager" isolationMode="Process" permissionSet="FullTrust">
+        <managerSettings>
+          <add name="AGIScriptType" value="TestScripts.Test, TestScripts"/>
+        </managerSettings>
+      </mapping>
+      <mapping name="/customsec" scriptManagerName="nAsterisk.RemoteScriptManagers.EchoCallerIDManager" isolationMode="AppDomain" permissionSet="Custom">
+        <customPermission>
+          <PermissionSet class="System.Security.PermissionSet"  version="1">
+            <IPermission class="System.Security.Permissions.ZoneIdentityPermission, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+            version="1"
+            Zone="Internet"/>
+          </PermissionSet>
+        </customPermission>
+      </mapping>
+    </scriptMappings>
+  </nAsterisk.agiScriptHost>
+</configuration>
