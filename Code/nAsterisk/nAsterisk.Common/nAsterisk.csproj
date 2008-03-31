@@ -14,8 +14,8 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\nAsterisk_Public.snk</AssemblyOriginatorKeyFile>
-    <DelaySign>true</DelaySign>
+    <AssemblyOriginatorKeyFile>ub.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
@@ -124,6 +124,7 @@
     <None Include="..\nAsterisk_Public.snk">
       <Link>nAsterisk_Public.snk</Link>
     </None>
+    <None Include="ub.snk" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
